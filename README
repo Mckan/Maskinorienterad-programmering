@@ -1,0 +1,7 @@
+This project is divided into two folders.
+
+The folder "assembler" contains all the assembler code from lab1 - lab3.
+
+The folder "c" contains the code from lab4.
+
+exit();
