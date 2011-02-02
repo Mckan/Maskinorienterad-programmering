@@ -1,0 +1,52 @@
+mod:hello:O12:hello.o12
+seg:text:12
+seg:bss:0
+seg:data:0
+seg:rodata:11
+C:text	A7A7CE0000341600001B823D
+C:rodata	48656C6C6F204D4F502100
+RG:text:hello:00000007:O:W:_printf:32
+RL:text:hello:00000003:O:W:00000000:rodata:30
+G:text:hello:00000001:_main
+SY:C:M:hello$C:/users/danielkvist/Mina dokument/Dropbox/Docs/Skola/MOP/Maskinorienterad-programmering/c/hello/src/hello.c
+SY:C:F:hello:text:_main:00000001:3
+SY:C:X:hello:3:1:text:1
+SY:C:X:hello:4:3:text:2
+SY:C:X:hello:5:1:text:B
+SY:C:Z:hello:5:1:text:B
+SY:C:E:hello:text:_main:0000000C:5
+SY:C:T:  typ0 V (-1)
+SY:C:T:  typ1 L (4)
+SY:C:T:  typ2 l (4)
+SY:C:T:  typ3 C (1)
+SY:C:T:  typ4 c (1)
+SY:C:T:  typ5 S (2)
+SY:C:T:  typ6 s (2)
+SY:C:T:  typ7 g (4)
+SY:C:T:  typ8 G (4)
+SY:C:T:  typ9 h (4)
+SY:C:T:  typ10 R (2)
+SY:C:T:  typ11 I (2)
+SY:C:T:  typ12 i (2)
+SY:C:T:  typ13 E (2)
+SY:C:T:  typ14 F (2)
+SY:C:T:  typ15 P (2)
+SY:C:T:hello: typ16-hello Z (4)U float_long {\
+f:(0):(typ8);\
+l:(0):(typ1);\
+}
+SY:C:T:hello: typ17-hello Z (12)S _iobuf {\
+_base:(0):(typ18-hello);\
+_ptr:(2):(typ19-hello);\
+_filename:(4):(typ20-hello);\
+_cnt:(6):(typ12);\
+_flag:(8):(typ6);\
+_bufsiz:(10):(typ12);\
+}
+SY:C:T:hello: typ18-hello a *(typ3)
+SY:C:T:hello: typ19-hello a *(typ3)
+SY:C:T:hello: typ20-hello a *(typ3)
+SY:C:T: typ2 l (4)
+SY:C:T: typ4 c (1)
+SY:C:T: typ6 s (2)
+e
