@@ -1,0 +1,119 @@
+**************************************************************************************
+* SUBRUTIN - DOWN
+* Beskrivning: 		Rutinen sänker borret
+* 
+* Anrop: 		JSR DOWN
+* Indata: 		Inga
+* Utdata: 		Inga
+* Registerpåverkan: 	CC-registret får påverkas
+* Anropade subrutiner: 	OUTONE
+**************************************************************************************
+DOWN	PSHA
+	PSHB			Spara på stacken
+	LDAA	DRCOPY		Läs status
+	ANDA	#4		Maska fram bit 2 som visar om motorn är på
+	CMPA	#4		
+	BNE	DOWNX		Om motorn ej är på, sänk ej borret
+	LDAB	#3		Skicka 1a till bit 3
+	JSR	OUTONE
+DOWNX	PULB			Hämta tillbaka värden
+	PULA
+	RTS			Return
+**************************************************************************************
+*
+**************************************************************************************
+* SUBRUTIN - UP
+* Beskrivning: 		Rutinen höjjer borret
+* 
+* Anrop: 		JSR UP
+* Indata: 		Inga
+* Utdata: 		Inga
+* Registerpåverkan: 	CC-registret får påverkas
+* Anropade subrutiner: 	OUTZERO
+**************************************************************************************
+UP	PSHA
+	PSHB
+	LDAA	DRCOPY		Läs status
+	ANDA	#8		Maska fram bit 3 som visar om borren är uppe då den är 0
+	CMPA	#8
+	BNE	UPX		Om uppe, gå ut
+	LDAB	#3		Om nere skicka 0a till bit 3
+	JSR	OUTZERO
+	
+UPCHK	LDAA	DRSTAT
+	ANDA	#2
+	CMPA	#2
+	BNE	UPCHK
+
+UPX	PULB
+	PULA
+	RTS
+**************************************************************************************
+*
+**************************************************************************************
+* SUBRUTIN - STEP
+* Beskrivning: 		Rutinen stegar arbetsstycket
+* 
+* Anrop: 		JSR STEP
+* Indata: 		Inga
+* Utdata: 		Inga
+* Registerpåverkan: 	CC-registret får påverkas
+* Anropade subrutiner: 	OUTONE, DELAY, OUTZERO
+**************************************************************************************
+STEP	PSHA
+	PSHB
+	LDAA	DRSTAT		Läs status
+	ANDA	#2
+	CMPA	#2		Kollar om borret är uppe
+	BNE	BEEP		Är borret nere så skickar vi alarm puls sen avslutar rutinen
+	LDAB	#1		Sätt riktning på step medurs
+	JSR	OUTONE		Mata ut ettan
+	LDAB	#0
+	JSR	OUTONE		Ettar signalen på bit 0
+	
+	LDAA	#1
+	JSR	DELAY		Delay för att hinna läsa pulsen
+	JSR	OUTZERO		Nollar signalen på bit 0
+	LDAA	#4
+	JSR	DELAY		Delay för att hinna vrida stycket
+*	
+STEPX	PULB			Exit
+	PULA
+	RTS
+*	
+BEEP	LDAB 	#3		Alarm 3 gånger
+	JSR	ALARM
+	JMP	STEPX
+**************************************************************************************
+*
+**************************************************************************************
+* SUBRUTIN - ALARM
+* Beskrivning: 		Rutinen ger alarm
+* 
+* Anrop: 		LDAB #3
+*			JSR ALARM
+* Indata: 		Antal signaler i B
+* Utdata: 		Inga
+* Registerpåverkan: 	CC-registret får påverkas
+* Anropade subrutiner: 	OUTONE, DELAY, OUTZERO
+**************************************************************************************
+ALARM	PSHA
+	PSHB
+	PSHX			Spara värden på stack
+	TFR	B,X		Kopiera B till X
+	LDAB 	#4	
+*	
+ALARML	JSR	OUTONE		Skicka etta till bit 4
+	LDAA	#8		
+	JSR	DELAY		Delay på 0,4 sek
+	JSR	OUTZERO		Skicka ut signal
+	LDAA 	#4		Delay på 0,2 sek
+	JSR	DELAY
+	DEX
+	BNE	ALARML		Alarm loop enligt antal signaler i B
+*
+	PULX
+	PULB
+	PULA			Hämta värden
+	RTS			Return
+	

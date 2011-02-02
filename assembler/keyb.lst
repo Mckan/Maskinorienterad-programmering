@@ -1,0 +1,85 @@
+QA12 - MC68HC12 Absolute crossassembler, Version 1.6.2
+(c) GMV 1989-2010
+
+
+File: keyb.lst
+                            1. *******************************************************************
+                            2. *SUBRUTIN - KEYB
+                            3. *Beskr: 	   Rutinen väntar tills samtliga tangenter är uppe. 
+                            4. *	   			Därefter registreras första nedtryckta tangent.
+                            5. *Anrop: 	   JSR KEYB
+                            6. *Indata:	   Inga
+                            7. *Utdata:	   Tangentnummer (0-FH) för nedtryckt tangent i register A.
+                            8. *Reg-påv:  	Register A,CC
+                            9. *Anr subr:  	Ingen
+                           10. *******************************************************************
+000000 34                  11. KEYB1	PSHX
+                           12. *
+"Z:/MOP/lab1_3/keyb.s12" line 13, ERROR: Undefined symbol 'KBDATA'
+000001 F7 00 00            13. KEY1	TST	KBDATA		läs tangentdataregister
+000004 2A FB               14. 	BPL	KEY1		Vänta om någon tangent nere (bit 7 = 0)
+                           15. *
+"Z:/MOP/lab1_3/keyb.s12" line 16, ERROR: Undefined symbol 'KBDATA'
+000006 B6 00 00            16. KEY2	LDAA	KBDATA		läs tangentdataregister
+000009 2B FB               17. 	BMI	KEY2		Vänta om alla uppe (bi t7 = 1)
+                           18. *
+00000B CE 00 12            19. 	LDX	#KEYTAB	Pekare till tangenttabell
+00000E A6 E4               20. 	LDAA	A,X			Hämta tangentnummer i tabell
+                           21. *
+000010 30                  22. 	PULX
+000011 3D                  23. 	RTS							
+                           24. *
+000012 00 04 08 0C 01 05   25. KEYTAB	FCB		0,4,8,12,1,5,9,13,2,6,10,14,3,7,11,15
+       09 0D 02 06 0A 0E
+       03 07 0B 0F      
+                           26. **************************************************************************************
+                           27. ***************************************************************************************
+                           28. *SUBRUTIN - DELAY
+                           29. *Beskrivn:		Skapar en fördröjning om N * 50 ms.
+                           30. *Anrop ex:		LDAA	#6		Fördröjning 6*50 ms = 300 ms
+                           31. *				JSR		DELAY
+                           32. *Indata:		Antal intervall, N, om 50 ms i A-registret
+                           33. *Utdata:		Inga
+                           34. *Reg-påverkan:		CC-registret får påverkas 
+                           35. *Anrop subr:		Ingen.
+                           36. ***************************************************************************************
+000022 36                  37. DELAY1	PSHA 			DELAY sätts lika med DELAY1 vid körning i HC12
+000023 34                  38. 	PSHX			A och X till stacken
+                           39. *	PSHY
+                           40. * 
+000024 97                  41. 	TSTA 
+000025 27 15               42. 	BEQ	DERET		Fördröjningsvärde noll 
+                           43. * 
+000027 CE 27 10            44. ALOOP	LDX	#10000		10000x5 mikrosek = 50 ms fördröjning 
+                           45. *
+                           46. *	LDY	#2000
+                           47. *BLOOP	DEY
+00002A 09                  48. XLOOP	DEX			Denna del skall justeras tills den tar 5 mikrosek
+                           49. *				Räknat på 125ns
+00002B A7                  50. 	NOP
+00002C A7                  51. 	NOP
+00002D A7                  52. 	NOP
+00002E A7                  53. 	NOP
+00002F A7                  54. 	NOP
+000030 A7                  55. 	NOP
+000031 A7                  56. 	NOP
+000032 A7                  57. 	NOP
+000033 A7                  58. 	NOP
+000034 A7                  59. 	NOP
+000035 A7                  60. 	NOP
+000036 A7                  61. 	NOP
+000037 26 F1               62. 	BNE	XLOOP
+                           63. * 
+                           64. *	TSTY	
+                           65. *	BNE	BLOOP
+000039 43                  66. 	DECA 
+00003A 26 EB               67. 	BNE	ALOOP				
+                           68. * 
+                           69. *	PULY
+00003C 30                  70. DERET	PULX
+00003D 32                  71. 	PULA
+00003E 3D                  72. 	RTS
+                           73. ***************************************************************************************
+
+
+****** Total Errors: 2

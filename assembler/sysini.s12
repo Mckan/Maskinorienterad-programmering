@@ -1,0 +1,145 @@
+BEGIN 	EQU 	$2000 	BEGIN är startadressen för RWM
+BOS	EQU	$2F00 	BOS är Bottom Of Stack
+COMNR 	EQU 	$2FFF 	COMNR är kommandonumret
+DRCOPY 	EQU 	$2FFE 	DRCOPY är en kopia av senaste styrord
+DRCTRL 	EQU 	$0400 	Utport för styrordet till borrmaskinen
+DRSTAT	EQU	$0401 	Inport för givare ISL
+*DRSTAT 	EQU 	$0600 	Inport för givare på borrmaskinen IRL
+IRES1	EQU	$0DC2	Nödstoppsvippan	
+IRES2	EQU	$0DC3	Signalvippan
+IRQSRC	EQU	$0DC0	IRQ source
+IRQVEC	EQU	$FFF2	ISL
+*IRQVEC	EQU	$3FF2	IRL
+KBDATA	EQU	$09C0 	Inport för avläsning av tangentnummer
+STSIZE	EQU	$40
+
+	
+**************************************************************
+* Program SYSINI
+* Utför nödvändiga initieringar och skapar fyra
+* parallella processer
+**************************************************************
+	ORG	BEGIN
+
+* Skapar färdiga stackar för program 1-3
+SYSINI	LDX	#PROGR1				Återhoppsadress till progr 1
+	STX	BOS-STSIZE-2		
+	LDX	#PROGR2				Återhoppsadress till progr 2
+	STX	BOS-(STSIZE+STSIZE)-2
+	LDX	#PROGR3				Återhoppsadress till progr 3
+	STX	BOS-(STSIZE+STSIZE+STSIZE)-2
+*
+	LDAA	#$C0				CC-registrets innehåll, 
+	STAA	BOS-STSIZE-9			med S=1,X=1,I=0 och övriga=0.
+	STAA	BOS-(STSIZE+STSIZE)-9
+	STAA	BOS-(STSIZE+STSIZE+STSIZE)-9		
+***************************************************************
+* Skapar tabell med stackpekare till processerna
+***************************************************************
+	LDX	#BOS-STSIZE-9
+	STX	SPTAB+2
+	LDX	#BOS-(STSIZE+STSIZE)-9
+	STX	SPTAB+4
+	LDX	#BOS-(STSIZE+STSIZE+STSIZE)-9
+	STX	SPTAB+6
+*
+	LDX	#IRQRUT			Sätt IRQ-vektorn
+	STX	IRQVEC
+*
+	CLR	CURPRG			Program 0 skall exekveras
+*
+	LDS	#BOS			Stackpekare för program 0
+*
+	STAA	IRES1			Nollställ avbrottsvippan
+************************************************
+	CLI				Tillåter I-avbrott
+*
+	JMP	PROGR0			Till första processen
+*
+********************************************************************************************
+* Dataarea
+********************************************************************************************
+CURPRG	RMB	1			Aktivt program
+SPTAB	RMB	8			Tabell för processernas stackpekare
+*
+********************************************************************************************
+* Avbrottshanterare IRQRUT
+* Byter process (Round robin, modulo 4), visar process-
+* nummer på DRCTRL, bit 7 och 6. Nollställer avbrottsvippa
+********************************************************************************************
+*
+IRQRUT	LDAB	CURPRG			Vilket program exekverar?
+	LDX	#SPTAB			Adress till stackpekartabell i X
+	STS	B,X			Spara dess stackpekare i tabellen!
+*
+	ADDB	#2			Nästa modulo-4 på tur
+	ANDB	#%00000110		Sekvens 000,010,100,110,000,...
+	STAB	CURPRG
+*
+	LDS	B,X		Laddar stackpekare för nästa process
+*
+	JSR	SHWPROC		Nästa processnummer till DRCTRL bit 7,6
+	STAA	IRES1		Nollställ avbrottsvippan
+*
+	RTI			Hopp till nästa process
+*
+********************************************************************************************
+* SUBRUTIN SHWPROC
+* Beskrivning:		Subrutin som visar processnumret på bit 7,6 på port DRCTRL.
+* Anrop:		JSR SHWPROC
+* Indata:		2 * processnr i B-reg
+* Utdata:		Inga
+* Reg-påv:		Register A,B,CC
+* Anr subr:		Ingen
+********************************************************************************************
+SHWPROC	LDAA	#$20		Processnummer till reg B bit 7,6.
+	MUL
+*
+	LDAA	#%00111111	Nollställ bit 7,6 i DRCOPY
+	ANDA	DRCOPY
+	STAA	DRCOPY
+*
+	ORAB	DRCOPY		Processnummer till DRCOPY bit 7,6.
+	STAB	DRCOPY
+	STAB	DRCTRL		Processnummer till DRCTRL bit 7,6.
+	RTS
+*
+********************************************************************************************
+* De parallella processerna. Här ska ni lägga in  
+* er kod i uppgift 10b, eller hopp till er kod
+********************************************************************************************
+PROGR0	NOP			Program 0
+	JSR	DRINIT		Initierar Borren
+	LDAA	#$FF		Sätt COMNR till FFH
+	STAA	COMNR
+KEYLOOP	JSR	KEYB		Läs tagent
+	STAA	COMNR		Spara tagentnr
+	CMPA	#15		Kolla om 15 (Nödstop)?
+	BNE	KEYLOOP		Om inte läs tagent igen
+*	
+	SEI			Sätt I-flaggan till 1
+	JSR	DRINIT		Initierar borren
+	JMP 	SYSINI		Hoppar till sysini
+********************************************************************************************
+PROGR1	NOP			Program 1
+	LDAB	COMNR		COMNR till B
+	CMPB	#6		
+	BHI	PROGR1		Läs igen om ogiltigt kommando
+	LDAA	#$FF		
+	STAA	COMNR		Ladda COMNR med FFH
+	JSR	COMND		KÖR kommandot från B
+	JMP	PROGR1  	Läs igen (Loop)
+*******************************************************************************************
+PROGR2	NOP			Program 2
+	LDAB	COMNR		Ladda COMNR till B
+	CMPB	#7		
+	BNE	PROGR2		OM inte tagent "TUTA" läs igen.
+	LDAA	#$FF
+	STAA	COMNR		Spara FFH i COMNR
+	JSR	SIGNAL		OM tagent "TUTA" tryckt så tuta!
+	JMP	PROGR2		LÄS igen
+*******************************************************************************************
+PROGR3	NOP			Program 3
+	JMP	PROGR3
+********************************************************************************************
+	USE	main1.s12

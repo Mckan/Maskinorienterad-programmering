@@ -1,0 +1,9 @@
+QA12 - MC68HC12 Absolute crossassembler, Version 1.6.2
+(c) GMV 1989-2010
+
+
+File: test.lst
+"Z:/MOP/lab1_3/test.s12" line 1, ERROR: Syntax Error
+000000                      1. 	LDAA	3*3
+
+****** Total Errors: 1

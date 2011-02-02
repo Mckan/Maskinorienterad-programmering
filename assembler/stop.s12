@@ -1,0 +1,47 @@
+*************************************************************************************
+* SUBRUTIN - STOP
+* Beskrivning: 		Rutinen stoppar borrmotorn, uppdaterar DRCOPY
+* för att borret skall uppnå rätt hastighet.
+* Anrop: 		JSR STOP
+* Indata: 		Inga
+* Utdata: 		Inga
+* Registerpåverkan: 	CC-registret får påverkas
+* Anropade subrutiner: 	OUTONE,DELAY
+**************************************************************************************
+STOP	PSHA
+	PSHB			Spara register
+*
+	LDAB 	#$02		Sätt bitnummer
+	JSR	OUTZERO		Skicka nolla till bit
+	
+	PULB
+	PULA
+	RTS
+*************************************************************************************
+*
+*************************************************************************************
+* SUBRUTIN - OUTZERO
+* Beskrivning: 		Rutinen skickar en 0a till utport
+* Anrop: 		LDAB #4
+*			JSR OUTZERO
+* Indata: 		Bit nummer i B (0-7)
+* Utdata: 		Inga
+* Registerpåverkan: 	CC-registret får påverkas
+* Anropade subrutiner: 	OUTONE,DELAY
+**************************************************************************************
+OUTZERO	PSHA
+	PSHX
+	SEI			Sätt interrupt flaggan för att förhindra avbrott
+	CMPB	#7		Giltigt värde mindre eller lika med 7
+	BHI	ZEROX		Gå ut annars
+	LDX	#ZEROTAB	Ladda in konverteringstabelll
+	LDAA	B,X		Ladda in värde i A
+	ANDA	DRCOPY		Nolla biten i DRCOPY
+	STAA	DRCOPY		Spara DRCOPY
+	STAA	DRCTRL		Skriv till utport
+ZEROX	CLI			Nollställ interrupt flaggan för att tillåta avbrott
+	PULX
+	PULA
+	RTS			Return
+*
+ZEROTAB	FCB	$FE,$FC,$FB,$F7,$EF,$CF,$BF,$7F

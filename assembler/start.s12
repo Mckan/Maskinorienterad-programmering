@@ -1,0 +1,51 @@
+*************************************************************************************
+* SUBRUTIN - START
+* Beskrivning: 		Rutinen startar borrmotorn, uppdaterar DRCOPY och väntar i 200 ms
+* för att borret skall uppnå rätt hastighet.
+* Anrop: 		JSR START
+* Indata: 		Inga
+* Utdata: 		Inga
+* Registerpåverkan: 	CC-registret får påverkas
+* Anropade subrutiner: 	OUTONE, DELAY
+**************************************************************************************
+START 	PSHA
+	PSHB 			A och B till stacken
+*
+	LDAB 	#$02
+	JSR 	OUTONE 		Ettställ bit 2 i styrordet till borrmaskinen
+*
+	LDAA 	#$04
+	JSR 	DELAY 		Fördröjning 4*50 ms = 200 ms
+*
+	PULB 			Återställ reg enl ovan
+	PULA
+	RTS
+*************************************************************************************
+*
+*************************************************************************************
+* SUBRUTIN - OUTONE
+* Beskrivning: 		Rutinen skickar en 1a till utport
+* Anrop: 		LDAB #4
+*			JSR OUTONE
+* Indata: 		Bit nummer i B (0-7)
+* Utdata: 		Inga
+* Registerpåverkan: 	CC-registret får påverkas
+* Anropade subrutiner: 	OUTONE
+**************************************************************************************
+OUTONE	PSHA
+	PSHX			Spara register på stacken
+	SEI			Sätt interrupt flaggan för att förhindra avbrott
+	CMPB	#7		Tal större än 7 ogiltigt
+	BHI	ONEX		Hoppa ut om > 7
+	LDX	#ONETAB		Ladda in konverteringstabell
+	LDAA	B,X		Ladda in nya värdet i A
+	ORAA	DRCOPY		Ettställ biten i DRCOPY till A
+	STAA	DRCOPY		Spara kopia på status
+	STAA	DRCTRL		Spara till utport
+ONEX	CLI			Nollställ interrupt flaggan för att tillåta avbrott
+	PULX
+	PULA
+	RTS			Return
+*
+ONETAB	FCB	$1,$2,$4,$8,$10,$20,$40,$80	Konverteringstabell
+**************************************************************************************

@@ -1,0 +1,71 @@
+***************************************************************************************
+* SUBRUTIN - IRQINIT
+* Beskrivn:		Initierar IRQ-vektorn och nollställer vippor
+* Anrop ex:		JSR IRQR
+*
+* Indata:		Inga
+* Utdata:		Nollställer vippor, skriver IRQ-adress
+* Reg-påverkan:		CC-registret får påverkas
+* Anrop subr:		Inga
+***************************************************************************************
+IRQINIT	PSHD
+	LDD	#IRQR		Laddar adress till IRQ-rutinen
+	STD	IRQVEC		Sparar adressen i IRQ-vektorn
+	STAA 	IRES1		Nollställ nödstoppsvippa
+	STAA 	IRES2		Nollställ signalvippa
+	CLI			Nollställ I-flaggan
+	PULD			Ta tillbaka D
+	RTS			Return
+	
+***************************************************************************************
+*
+***************************************************************************************
+* SUBRUTIN - IRQR
+* Beskrivn:		Läser IRQ-status
+* Anrop ex:		JSR IRQR
+*
+* Indata:		Inga
+* Utdata:		I-flaggan (kanske)
+* Reg-påverkan:		CC-registret får påverkas 
+* Anrop subr:		SIGNAL
+***************************************************************************************
+IRQR	PSHA	
+	PSHB			Sparar register på stacken
+	LDAA	IRQSRC		Läs IRQ status
+	TFR	A,B		Gör en kopia
+	ANDA	#1		Maska bit0
+	CMPA	#1		Kolla om ettställd
+	BEQ	IRQX		Hoppa om 1
+	
+	ANDB	#2		Maska bit 1
+	CMPB	#2		Kolla om ettställd
+	BNE	IRQRET		Hoppa om 0
+	STAA	IRES2		Reset signalvippa
+	CLI			Nollställ I-flaggan
+	JSR	SIGNAL		Hoppa till signal
+*	
+IRQRET	PULB
+	PULA
+	RTI			Return
+*
+IRQX	STAA	IRES1		Reset nödstoppsvippan
+	PULB
+	PULA
+	JMP	DRPGM		Starta om programmet
+***************************************************************************************
+*
+***************************************************************************************
+* SUBRUTIN - SIGNAL
+* Beskrivn:		Ger avbrottslarm
+* Anrop ex:		JSR SIGNAL
+*
+* Indata:		Inga
+* Utdata:		Inga
+* Reg-påverkan:		Inga
+* Anrop subr:		ALARM
+***************************************************************************************
+SIGNAL	PSHB			Spara register
+	LDAB	#1		1 signal
+	JSR	ALARM		Hoppa till ALARM
+	PULB			Ta tillbaka B
+	RTS			Return

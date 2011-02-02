@@ -1,0 +1,139 @@
+*******************************************************************
+*SUBRUTIN - KEYB
+*Beskr: 	   Rutinen väntar tills samtliga tangenter är uppe. 
+*	   	   Därefter registreras första nedtryckta tangent.
+*Anrop: 	   JSR KEYB
+*Indata:	   Inga
+*Utdata:	   Tangentnummer (0-FH) för nedtryckt tangent i register A.
+*Reg-påv:  	   Register A,CC
+*Anr subr:	   Ingen
+*******************************************************************
+KEYB1	PSHX
+*
+KEY1	TST	KBDATA		Testa tangentdataregister
+	BPL	KEY1		Vänta om någon tangent nere (bit 7 = 0)
+*
+KEY2	LDAA	KBDATA		Läs tangentdataregister
+	BMI	KEY2		Vänta om alla uppe (bit7 = 1)
+*
+	LDX	#KEYTAB		Pekare till tangenttabell
+	LDAA	A,X		Hämta tangentnummer i tabell
+*
+	PULX
+	RTS							
+*
+KEYTAB	FCB		0,4,8,12,1,5,9,13,2,6,10,14,3,7,11,15
+**************************************************************************************
+***************************************************************************************
+*SUBRUTIN - DELAY
+*Beskrivn:		Skapar en fördröjning om N * 50 ms.
+*Anrop ex:		LDAA	#6		Fördröjning 6*50 ms = 300 ms
+*				JSR		DELAY
+*Indata:		Antal intervall, N, om 50 ms i A-registret
+*Utdata:		Inga
+*Reg-påverkan:		CC-registret får påverkas 
+*Anrop subr:		Ingen.
+***************************************************************************************
+DELAY1	PSHA 			DELAY sätts lika med DELAY1 vid körning i HC12
+	PSHX			A och X till stacken
+* 
+	TSTA 
+	BEQ	DERET		Fördröjningsvärde noll 
+* 
+ALOOP	LDX	#10000		10000x5 mikrosek = 50 ms fördröjning 
+*
+
+XLOOP	DEX			Denna del skall justeras tills den tar 5 mikrosek
+*				Räknat på 125ns
+	
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+*
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+*
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+*
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+*
+	BNE	XLOOP
+* 
+
+	DECA 
+	BNE	ALOOP				
+* 
+
+DERET	PULX
+	PULA
+	RTS
+***************************************************************************************
+***************************************************************************************
+*SUBRUTIN - DELAY3
+*Beskrivn:		Skapar en fördröjning om N * 50 ms.
+*Anrop ex:		LDAA	#6		Fördröjning 6*50 ms = 300 ms
+*				JSR		DELAY
+*Indata:		Antal intervall, N, om 50 ms i A-registret
+*Utdata:		Inga
+*Reg-påverkan:		CC-registret får påverkas 
+*Anrop subr:		Ingen.
+***************************************************************************************
+DELAY3	PSHA 			DELAY sätts lika med DELAY1 vid körning i HC12
+	PSHX			A och X till stacken
+* 
+	TSTA 
+	BEQ	DEARET		Fördröjningsvärde noll 
+* 
+*DALOOP	LDX	#10000		10000x5 mikrosek = 50 ms fördröjning 
+DALOOP	LDX	#500		
+*
+
+DXLOOP	DEX			Denna del skall justeras tills den tar 5 mikrosek
+*				Räknat på 125ns * 4 avbrott
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+*
+	BNE	DXLOOP
+* 
+
+	DECA 
+	BNE	DALOOP				
+* 
+
+DEARET	PULX
+	PULA
+	RTS
+***************************************************************************************

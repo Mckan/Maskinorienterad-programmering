@@ -1,0 +1,77 @@
+*******************************************************************************************
+* Symboldefinitioner
+BEGIN 	EQU 	$2000 	BEGIN är startadressen för RWM
+BOS 	EQU 	$2FEF 	BOS är Bottom Of Stack
+COMNR 	EQU 	$2FFF 	COMNR är kommandonumret
+DRCOPY 	EQU 	$2FFE 	DRCOPY är en kopia av senaste styrord
+DRCTRL 	EQU 	$0400 	Utport för styrordet till borrmaskinen
+DRSTAT	EQU	$0401 	Inport för givare ISL
+*DRSTAT 	EQU 	$0600 	Inport för givare på borrmaskinen IRL
+IRES1	EQU	$0DC2	Nödstoppsvippan	
+IRES2	EQU	$0DC3	Signalvippan
+IRQSRC	EQU	$0DC0	IRQ source
+IRQVEC	EQU	$FFF2	ISL
+*IRQVEC	EQU	$3FF2	IRL
+KBDATA	EQU	$09C0 	Inport för avläsning av tangentnummer
+
+*******************************************************************************************
+* Huvudprogram
+*******************************************************************************************
+	ORG 	BEGIN
+DRPGM 	LDS 	#BOS
+*
+	JSR 	DRINIT		Initierar borren
+	JSR	IRQINIT		Initierar avbrottssystemet
+*
+COLOOP 	JSR 	KEYB
+*
+	STAA 	COMNR
+*
+	LDAB 	COMNR
+*
+	JSR 	COMND
+	
+	JMP 	COLOOP
+*
+********************************************************************************************
+*SUBRUTIN – DRINIT
+*Beskrivning: 	Rutinen försätter borrmaskinen i passivt tillstånd.
+*Anrop: 	JSR DRINIT
+*Indata: 	Inga
+*Utdata: 	Inga
+*Reg-påverkan: 	Register CC
+*Anr subr: 	Ingen
+********************************************************************************************
+DRINIT 	CLR 	DRCTRL
+	CLR 	DRCOPY
+	RTS
+*
+*******************************************************************************************
+*
+	USE keyb.s12 	Inkludera keyboard rutiner
+	USE comnd.s12	Inkludera kommando rutiner
+	USE start.s12	Inkludera start rutiner
+	USE stop.s12	Inkludera stop rutiner
+	USE dusa.s12	Inkludera down, up, stop, alarm rutiner
+	USE drill.s12	Inkludera drill rutiner
+	USE auto.s12	Inkludera auto rutiner
+	USE irqr.s12	Inkludera IRQ rutiner
+*
+*******************************************************************************************
+KEYB2 	RTS 
+COMND2 	RTS
+DELAY2 	PULA
+	LDAA	#30
+DLOPP	DECA
+	NOP
+	BNE	DLOPP
+	PULA
+	RTS
+*
+********************************************************************************************
+********************************************************************************************
+*
+KEYB 	EQU 	KEYB1
+COMND 	EQU 	COMND1
+DELAY 	EQU 	DELAY2
+********************************************************************************************

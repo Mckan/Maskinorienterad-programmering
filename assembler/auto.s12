@@ -1,0 +1,80 @@
+********************************************************************************************
+*SUBRUTIN – REFPO
+*Beskrivning: 	Rutinen vrider stycket till referenspositionen
+*Anrop: 	JSR REFPO
+*Indata: 	Inga
+*Utdata: 	Inga
+*Reg-påverkan: 	Register CC
+*Anr subr: 	STEP
+********************************************************************************************
+REFPO	PSHA			Spara A på stacken
+RLOOP	LDAA	DRSTAT		Ladda inport till A
+	ANDA	#1		Maska bort allt utom bit 0
+	CMPA	#1		Jämför med en 1a
+	BEQ	REFX		Om lika, stycket är i position, exit
+	JSR	STEP		Om inte lika, steppa
+	JMP	RLOOP		Läs inporten igen
+REFX	PULA			Ta tillbaka A
+	RTS			Return
+********************************************************************************************
+*
+*********************************************************************************************
+* SUBRUTIN – NSTEP
+* Beskrivning: 	Rutinen vrider stycket N antal positioner
+* Anrop: 	LDAA #4
+*		JSR NSTEP
+* Indata: 	Antal sten i A-reg (0-255)
+* Utdata: 	Inga
+* Reg-påverkan: Register CC
+* Anr subr: 	STEP
+********************************************************************************************
+NSTEP	PSHA			Spara register på stacken
+*
+NLOOP	TSTA			Testa A och sätt flaggor
+	BEQ	NX		Noll steg, hoppa ut
+	JSR	STEP		Stega 1 ste
+	DECA			Minska A med 1
+	JMP	NLOOP		Testa igen
+*
+NX	PULA			Ta tillbaka A
+	RTS			Return
+********************************************************************************************
+*
+*********************************************************************************************
+* SUBRUTIN – AUTO
+* Beskrivning: 	Rutinen kör det automatiska programmet
+* Anrop: 	JSR AUTO
+* Indata: 	Inga
+* Utdata: 	Inga
+* Reg-påverkan: Register CC
+* Anr subr: 	REFPO, NSTEP, DRILL
+********************************************************************************************
+AUTO		PSHA
+		PSHX			Spara register på stacken
+*
+		JSR	REFPO		Gå till referensposition
+*
+		LDX	#PATTERN	Sätt pekare till mönstret
+AUTOLOOP	LDAA	1,X+		Ladda in värdet i mönstret i A
+		CMPA	#$FF		FF är slutmarkering, mer att borra?
+		BEQ	AUTOX		Om slutmarkeing, exit
+*
+		JSR	NSTEP		Steppa antalet steg som ligger i A
+		JSR 	DRILL		Borra
+		JMP	AUTOLOOP	Tillbaka till att läsa in nästa A-värde
+*
+AUTOX		PULX		
+		PULA			Hämta tillbaka sparade REG-värden
+		RTS			Return
+*
+PATTERN		FCB	0,1,1,1,1,1,1,1,2,1,5,2,2,2,2,4,4,3,8,2,$FF	Skapa mönstertabell
+*
+
+
+
+
+
+
+
+
+

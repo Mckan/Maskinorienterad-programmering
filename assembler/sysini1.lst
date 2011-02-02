@@ -1,0 +1,819 @@
+QA12 - MC68HC12 Absolute crossassembler, Version 1.6.2
+(c) GMV 1989-2010
+
+
+File: sysini1.lst
+       0000 2000            1. BEGIN 	EQU 	$2000 	BEGIN är startadressen för RWM
+---- File: "Z:\MOP\lab1_3\sysini1.s12"
+       0000 2F00            2. BOS	EQU	$2F00 	BOS är Bottom Of Stack
+       0000 2FFF            3. COMNR 	EQU 	$2FFF 	COMNR är kommandonumret
+       0000 2FFE            4. DRCOPY 	EQU 	$2FFE 	DRCOPY är en kopia av senaste styrord
+       0000 0400            5. DRCTRL 	EQU 	$0400 	Utport för styrordet till borrmaskinen
+       0000 0401            6. DRSTAT	EQU	$0401 	Inport för givare ISL
+                            7. *DRSTAT 	EQU 	$0600 	Inport för givare på borrmaskinen IRL
+       0000 0DC2            8. IRES1	EQU	$0DC2	Nödstoppsvippan	
+       0000 0DC3            9. IRES2	EQU	$0DC3	Signalvippan
+       0000 0DC0           10. IRQSRC	EQU	$0DC0	IRQ source
+       0000 FFF2           11. IRQVEC	EQU	$FFF2	ISL
+                           12. *IRQVEC	EQU	$3FF2	IRL
+       0000 09C0           13. KBDATA	EQU	$09C0 	Inport för avläsning av tangentnummer
+       0000 0040           14. STSIZE	EQU	$40
+                           15. 
+000000                     16. 	
+                           17. **************************************************************
+                           18. * Program SYSINI
+                           19. * Utför nödvändiga initieringar och skapar fyra
+                           20. * parallella processer
+                           21. **************************************************************
+002000                     22. 	ORG	BEGIN
+                           23. 
+                           24. * Skapar färdiga stackar för program 1-3
+002000 CE 20 94            25. SYSINI	LDX	#PROGR1				Återhoppsadress till progr 1
+002003 7E 2E BE            26. 	STX	BOS-STSIZE-2		
+002006 CE 20 A7            27. 	LDX	#PROGR2				Återhoppsadress till progr 2
+002009 7E 2E 7E            28. 	STX	BOS-(STSIZE+STSIZE)-2
+00200C CE 20 BA            29. 	LDX	#PROGR3				Återhoppsadress till progr 3
+00200F 7E 2E 3E            30. 	STX	BOS-(STSIZE+STSIZE+STSIZE)-2
+                           31. *
+002012 86 C0               32. 	LDAA	#$C0				CC-registrets innehåll, 
+002014 7A 2E B7            33. 	STAA	BOS-STSIZE-9			med S=1,X=1,I=0 och övriga=0.
+002017 7A 2E 77            34. 	STAA	BOS-(STSIZE+STSIZE)-9
+00201A 7A 2E 37            35. 	STAA	BOS-(STSIZE+STSIZE+STSIZE)-9		
+                           36. ***************************************************************
+                           37. * Skapar tabell med stackpekare till processerna
+                           38. ***************************************************************
+00201D CE 2E B7            39. 	LDX	#BOS-STSIZE-9
+002020 7E 20 46            40. 	STX	SPTAB+2
+002023 CE 2E 77            41. 	LDX	#BOS-(STSIZE+STSIZE)-9
+002026 7E 20 48            42. 	STX	SPTAB+4
+002029 CE 2E 37            43. 	LDX	#BOS-(STSIZE+STSIZE+STSIZE)-9
+00202C 7E 20 4A            44. 	STX	SPTAB+6
+                           45. *
+00202F CE 20 4C            46. 	LDX	#IRQRUT			Sätt IRQ-vektorn
+002032 7E FF F2            47. 	STX	IRQVEC
+                           48. *
+002035 79 20 43            49. 	CLR	CURPRG			Program 0 skall exekveras
+                           50. *
+002038 CF 2F 00            51. 	LDS	#BOS			Stackpekare för program 0
+                           52. *
+00203B 7A 0D C2            53. 	STAA	IRES1			Nollställ avbrottsvippan
+                           54. ************************************************
+00203E 10 EF               55. 	CLI				Tillåter I-avbrott
+                           56. *
+002040 06 20 79            57. 	JMP	PROGR0			Till första processen
+                           58. *
+                           59. ********************************************************************************************
+                           60. * Dataarea
+                           61. ********************************************************************************************
+002043 00                  62. CURPRG	RMB	1			Aktivt program
+002044 00                  63. SPTAB	RMB	8			Tabell för processernas stackpekare
+                           64. *
+                           65. ********************************************************************************************
+                           66. * Avbrottshanterare IRQRUT
+                           67. * Byter process (Round robin, modulo 4), visar process-
+                           68. * nummer på DRCTRL, bit 7 och 6. Nollställer avbrottsvippa
+                           69. ********************************************************************************************
+                           70. *
+00204C F6 20 43            71. IRQRUT	LDAB	CURPRG			Vilket program exekverar?
+00204F CE 20 44            72. 	LDX	#SPTAB			Adress till stackpekartabell i X
+002052 6F E5               73. 	STS	B,X			Spara dess stackpekare i tabellen!
+                           74. *
+002054 CB 02               75. 	ADDB	#2			Nästa modulo-4 på tur
+002056 C4 06               76. 	ANDB	#%00000110		Sekvens 000,010,100,110,000,...
+002058 7B 20 43            77. 	STAB	CURPRG
+                           78. *
+00205B EF E5               79. 	LDS	B,X		Laddar stackpekare för nästa process
+                           80. *
+00205D 16 20 64            81. 	JSR	SHWPROC		Nästa processnummer till DRCTRL bit 7,6
+002060 7A 0D C2            82. 	STAA	IRES1		Nollställ avbrottsvippan
+                           83. *
+002063 0B                  84. 	RTI			Hopp till nästa process
+                           85. *
+                           86. ********************************************************************************************
+                           87. * SUBRUTIN SHWPROC
+                           88. * Beskrivning:		Subrutin som visar processnumret på bit 7,6 på port DRCTRL.
+                           89. * Anrop:		JSR SHWPROC
+                           90. * Indata:		2 * processnr i B-reg
+                           91. * Utdata:		Inga
+                           92. * Reg-påv:		Register A,B,CC
+                           93. * Anr subr:		Ingen
+                           94. ********************************************************************************************
+002064 86 20               95. SHWPROC	LDAA	#$20		Processnummer till reg B bit 7,6.
+002066 12                  96. 	MUL
+                           97. *
+002067 86 3F               98. 	LDAA	#%00111111	Nollställ bit 7,6 i DRCOPY
+002069 B4 2F FE            99. 	ANDA	DRCOPY
+00206C 7A 2F FE           100. 	STAA	DRCOPY
+                          101. *
+00206F FA 2F FE           102. 	ORAB	DRCOPY		Processnummer till DRCOPY bit 7,6.
+002072 7B 2F FE           103. 	STAB	DRCOPY
+002075 7B 04 00           104. 	STAB	DRCTRL		Processnummer till DRCTRL bit 7,6.
+002078 3D                 105. 	RTS
+                          106. *
+                          107. ********************************************************************************************
+                          108. * De parallella processerna. Här ska ni lägga in  
+                          109. * er kod i uppgift 10b, eller hopp till er kod
+                          110. ********************************************************************************************
+002079 A7                 111. PROGR0	NOP			Program 0
+00207A 16 20 D6           112. 	JSR	DRINIT		Initierar Borren
+00207D 86 FF              113. 	LDAA	#$FF		Sätt COMNR till FFH
+00207F 7A 2F FF           114. 	STAA	COMNR
+002082 16 20 DD           115. KEYLOOP	JSR	KEYB		Läs tagent
+002085 7A 2F FF           116. 	STAA	COMNR		Spara tagentnr
+002088 81 0F              117. 	CMPA	#15		Kolla om 15 (Nödstop)?
+00208A 26 F6              118. 	BNE	KEYLOOP		Om inte läs tagent igen
+                          119. *	
+00208C 14 10              120. 	SEI			Sätt I-flaggan till 1
+00208E 16 20 D6           121. 	JSR	DRINIT		Initierar borren
+002091 06 20 00           122. 	JMP 	SYSINI		Hoppar till sysini
+                          123. ********************************************************************************************
+002094 A7                 124. PROGR1	NOP			Program 1
+002095 F6 2F FF           125. 	LDAB	COMNR		COMNR till B
+002098 C1 06              126. 	CMPB	#6		
+00209A 22 F8              127. 	BHI	PROGR1		Läs igen om ogiltigt kommando
+00209C 86 FF              128. 	LDAA	#$FF		
+00209E 7A 2F FF           129. 	STAA	COMNR		Ladda COMNR med FFH
+0020A1 16 21 4B           130. 	JSR	COMND		KÖR kommandot från B
+0020A4 06 20 94           131. 	JMP	PROGR1  	Läs igen (Loop)
+                          132. *******************************************************************************************
+0020A7 A7                 133. PROGR2	NOP			Program 2
+0020A8 F6 2F FF           134. 	LDAB	COMNR		Ladda COMNR till B
+0020AB C1 07              135. 	CMPB	#7		
+0020AD 26 F8              136. 	BNE	PROGR2		OM inte tagent "TUTA" läs igen.
+0020AF 86 FF              137. 	LDAA	#$FF
+0020B1 7A 2F FF           138. 	STAA	COMNR		Spara FFH i COMNR
+0020B4 16 22 FD           139. 	JSR	SIGNAL		OM tagent "TUTA" tryckt så tuta!
+0020B7 06 20 A7           140. 	JMP	PROGR2		LÄS igen
+                          141. *******************************************************************************************
+0020BA A7                 142. PROGR3	NOP			Program 3
+0020BB 06 20 BA           143. 	JMP	PROGR3
+                          144. ********************************************************************************************
+                          145. 	USE	main2.s12
+---- File: "main2.s12"
+                          146. *******************************************************************************************
+                          147. * Huvudprogram
+                          148. *******************************************************************************************
+0020BE                    149. 	
+0020BE CF 2F 00           150. DRPGM 	LDS 	#BOS
+                          151. *
+0020C1 16 20 D6           152. 	JSR 	DRINIT		Initierar borren
+0020C4 16 22 C6           153. 	JSR	IRQINIT		Initierar avbrottssystemet
+                          154. *
+0020C7 16 20 DD           155. COLOOP 	JSR 	KEYB
+                          156. *
+0020CA 7A 2F FF           157. 	STAA 	COMNR
+                          158. *
+0020CD F6 2F FF           159. 	LDAB 	COMNR
+                          160. *
+0020D0 16 21 4B           161. 	JSR 	COMND
+0020D3                    162. 	
+0020D3 06 20 C7           163. 	JMP 	COLOOP
+                          164. *
+                          165. ********************************************************************************************
+                          166. *SUBRUTIN – DRINIT
+                          167. *Beskrivning: 	Rutinen försätter borrmaskinen i passivt tillstånd.
+                          168. *Anrop: 	JSR DRINIT
+                          169. *Indata: 	Inga
+                          170. *Utdata: 	Inga
+                          171. *Reg-påverkan: 	Register CC
+                          172. *Anr subr: 	Ingen
+                          173. ********************************************************************************************
+0020D6 79 04 00           174. DRINIT 	CLR 	DRCTRL
+0020D9 79 2F FE           175. 	CLR 	DRCOPY
+0020DC 3D                 176. 	RTS
+                          177. *
+                          178. *******************************************************************************************
+                          179. *
+                          180. 	USE keyb.s12 	Inkludera keyboard rutiner
+---- File: "keyb.s12"
+                          181. *******************************************************************
+                          182. *SUBRUTIN - KEYB
+                          183. *Beskr: 	   Rutinen väntar tills samtliga tangenter är uppe. 
+                          184. *	   	   Därefter registreras första nedtryckta tangent.
+                          185. *Anrop: 	   JSR KEYB
+                          186. *Indata:	   Inga
+                          187. *Utdata:	   Tangentnummer (0-FH) för nedtryckt tangent i register A.
+                          188. *Reg-påv:  	   Register A,CC
+                          189. *Anr subr:	   Ingen
+                          190. *******************************************************************
+0020DD 34                 191. KEYB1	PSHX
+                          192. *
+0020DE F7 09 C0           193. KEY1	TST	KBDATA		Testa tangentdataregister
+0020E1 2A FB              194. 	BPL	KEY1		Vänta om någon tangent nere (bit 7 = 0)
+                          195. *
+0020E3 B6 09 C0           196. KEY2	LDAA	KBDATA		Läs tangentdataregister
+0020E6 2B FB              197. 	BMI	KEY2		Vänta om alla uppe (bit7 = 1)
+                          198. *
+0020E8 CE 20 EF           199. 	LDX	#KEYTAB		Pekare till tangenttabell
+0020EB A6 E4              200. 	LDAA	A,X		Hämta tangentnummer i tabell
+                          201. *
+0020ED 30                 202. 	PULX
+0020EE 3D                 203. 	RTS							
+                          204. *
+0020EF 00 04 08 0C 01 05  205. KEYTAB	FCB		0,4,8,12,1,5,9,13,2,6,10,14,3,7,11,15
+       09 0D 02 06 0A 0E
+       03 07 0B 0F      
+                          206. **************************************************************************************
+                          207. ***************************************************************************************
+                          208. *SUBRUTIN - DELAY
+                          209. *Beskrivn:		Skapar en fördröjning om N * 50 ms.
+                          210. *Anrop ex:		LDAA	#6		Fördröjning 6*50 ms = 300 ms
+                          211. *				JSR		DELAY
+                          212. *Indata:		Antal intervall, N, om 50 ms i A-registret
+                          213. *Utdata:		Inga
+                          214. *Reg-påverkan:		CC-registret får påverkas 
+                          215. *Anrop subr:		Ingen.
+                          216. ***************************************************************************************
+0020FF 36                 217. DELAY1	PSHA 			DELAY sätts lika med DELAY1 vid körning i HC12
+002100 34                 218. 	PSHX			A och X till stacken
+                          219. * 
+002101 97                 220. 	TSTA 
+002102 27 2D              221. 	BEQ	DERET		Fördröjningsvärde noll 
+                          222. * 
+002104 CE 27 10           223. ALOOP	LDX	#10000		10000x5 mikrosek = 50 ms fördröjning 
+                          224. *
+                          225. 
+002107 09                 226. XLOOP	DEX			Denna del skall justeras tills den tar 5 mikrosek
+                          227. *				Räknat på 125ns
+002108                    228. 	
+002108 A7                 229. 	NOP
+002109 A7                 230. 	NOP
+00210A A7                 231. 	NOP
+00210B A7                 232. 	NOP
+00210C A7                 233. 	NOP
+00210D A7                 234. 	NOP
+00210E A7                 235. 	NOP
+00210F A7                 236. 	NOP
+002110 A7                 237. 	NOP
+002111 A7                 238. 	NOP
+                          239. *
+002112 A7                 240. 	NOP
+002113 A7                 241. 	NOP
+002114 A7                 242. 	NOP
+002115 A7                 243. 	NOP
+002116 A7                 244. 	NOP
+002117 A7                 245. 	NOP
+002118 A7                 246. 	NOP
+002119 A7                 247. 	NOP
+00211A A7                 248. 	NOP
+00211B A7                 249. 	NOP
+                          250. *
+00211C A7                 251. 	NOP
+00211D A7                 252. 	NOP
+00211E A7                 253. 	NOP
+00211F A7                 254. 	NOP
+002120 A7                 255. 	NOP
+002121 A7                 256. 	NOP
+002122 A7                 257. 	NOP
+002123 A7                 258. 	NOP
+002124 A7                 259. 	NOP
+002125 A7                 260. 	NOP
+                          261. *
+002126 A7                 262. 	NOP
+002127 A7                 263. 	NOP
+002128 A7                 264. 	NOP
+002129 A7                 265. 	NOP
+00212A A7                 266. 	NOP
+00212B A7                 267. 	NOP
+                          268. *
+00212C 26 D9              269. 	BNE	XLOOP
+                          270. * 
+                          271. 
+00212E 43                 272. 	DECA 
+00212F 26 D3              273. 	BNE	ALOOP				
+                          274. * 
+                          275. 
+002131 30                 276. DERET	PULX
+002132 32                 277. 	PULA
+002133 3D                 278. 	RTS
+                          279. ***************************************************************************************
+                          280. ***************************************************************************************
+                          281. *SUBRUTIN - DELAY3
+                          282. *Beskrivn:		Skapar en fördröjning om N * 50 ms.
+                          283. *Anrop ex:		LDAA	#6		Fördröjning 6*50 ms = 300 ms
+                          284. *				JSR		DELAY
+                          285. *Indata:		Antal intervall, N, om 50 ms i A-registret
+                          286. *Utdata:		Inga
+                          287. *Reg-påverkan:		CC-registret får påverkas 
+                          288. *Anrop subr:		Ingen.
+                          289. ***************************************************************************************
+002134 36                 290. DELAY3	PSHA 			DELAY sätts lika med DELAY1 vid körning i HC12
+002135 34                 291. 	PSHX			A och X till stacken
+                          292. * 
+002136 97                 293. 	TSTA 
+002137 27 0F              294. 	BEQ	DEARET		Fördröjningsvärde noll 
+                          295. * 
+                          296. *DALOOP	LDX	#10000		10000x5 mikrosek = 50 ms fördröjning 
+002139 CE 01 F4           297. DALOOP	LDX	#500		
+                          298. *
+                          299. 
+00213C 09                 300. DXLOOP	DEX			Denna del skall justeras tills den tar 5 mikrosek
+                          301. *				Räknat på 125ns * 4 avbrott
+00213D A7                 302. 	NOP
+00213E A7                 303. 	NOP
+00213F A7                 304. 	NOP
+002140 A7                 305. 	NOP
+002141 A7                 306. 	NOP
+002142 A7                 307. 	NOP
+                          308. *
+002143 26 F7              309. 	BNE	DXLOOP
+                          310. * 
+                          311. 
+002145 43                 312. 	DECA 
+002146 26 F1              313. 	BNE	DALOOP				
+                          314. * 
+                          315. 
+002148 30                 316. DEARET	PULX
+002149 32                 317. 	PULA
+00214A 3D                 318. 	RTS
+                          319. ***************************************************************************************
+                          320. 	USE comnd.s12	Inkludera kommando rutiner
+---- File: "comnd.s12"
+                          321. *******************************************************************************************
+                          322. * SUBRUTIN - COMND
+                          323. *Beskrivning: 	Rutinen avgör vilken kommandosubrutin som skall anropas och anropar denna.
+                          324. *Anrop ex: 	LDAB #5 Sätt kommando nummer 5
+                          325. * 		JSR COMND Kommando nr 5 utförs
+                          326. *Indata: 	Kommandonummer i reg B
+                          327. *Utdata: 	Inga
+                          328. *Reg-påverkan: 	CC-registret får påverkas
+                          329. *Anrop subr: 	SUB0 - SUB7
+                          330. *******************************************************************************************
+       0000 0007          331. MAX 	EQU 	7 		Maxvärde för kommandonummer
+00214B 37                 332. COMND1 	PSHB 			Spara register på stack
+00214C 34                 333. 	PSHX 			A, B och X till stacken
+                          334. *
+00214D C1 07              335. 	CMPB 	#MAX 		Giltigt värde?
+00214F 22 08              336. 	BHI 	COMEX 		Nej, hoppa ut
+                          337. *
+002151 CE 21 5C           338. 	LDX	#JUMPTAB 	Ja, pekare till hopptabell
+002154 58                 339. 	ASLB 			2 bytes per adress
+002155 EE E5              340. 	LDX B,X 		Hämta hoppadress från tabell
+                          341. *
+002157 15 00              342. 	JSR ,X 			Utför kommandosubrutin
+                          343. *
+002159 30                 344. COMEX 	PULX 			Återställ register
+00215A 33                 345. 	PULB
+00215B 3D                 346. 	RTS
+                          347. *
+                          348. *******************************************************************************************
+                          349. * Tabell med subrutinadresser
+                          350. *
+00215C 21 6F 21 A1 21 CE  351. JUMPTAB FDB START,STOP,DOWN,UP,STEP,DRILL,AUTO,SUB7
+       21 E1 21 FD 22 68
+       22 97 21 6E      
+                          352. *******************************************************************************************
+00216C 3D                 353. SUB0 	RTS Tomma subrutiner
+00216D 3D                 354. SUB1 	RTS
+                          355. *DOWN 	RTS
+                          356. *UP	RTS
+                          357. *STEP 	RTS
+                          358. *DRILL 	RTS
+                          359. *AUTO	RTS
+00216E 3D                 360. SUB7 	RTS
+                          361. *******************************************************************************************
+                          362. *
+                          363. *******************************************************************************************                          364. 	USE start.s12	Inkludera start rutiner
+---- File: "start.s12"
+                          365. *************************************************************************************
+                          366. * SUBRUTIN - START
+                          367. * Beskrivning: 		Rutinen startar borrmotorn, uppdaterar DRCOPY och väntar i 200 ms
+                          368. * för att borret skall uppnå rätt hastighet.
+                          369. * Anrop: 		JSR START
+                          370. * Indata: 		Inga
+                          371. * Utdata: 		Inga
+                          372. * Registerpåverkan: 	CC-registret får påverkas
+                          373. * Anropade subrutiner: 	OUTONE, DELAY
+                          374. **************************************************************************************
+00216F 36                 375. START 	PSHA
+002170 37                 376. 	PSHB 			A och B till stacken
+                          377. *
+002171 C6 02              378. 	LDAB 	#$02
+002173 16 21 7E           379. 	JSR 	OUTONE 		Ettställ bit 2 i styrordet till borrmaskinen
+                          380. *
+002176 86 04              381. 	LDAA 	#$04
+002178 16 21 34           382. 	JSR 	DELAY 		Fördröjning 4*50 ms = 200 ms
+                          383. *
+00217B 33                 384. 	PULB 			Återställ reg enl ovan
+00217C 32                 385. 	PULA
+00217D 3D                 386. 	RTS
+                          387. *************************************************************************************
+                          388. *
+                          389. *************************************************************************************
+                          390. * SUBRUTIN - OUTONE
+                          391. * Beskrivning: 		Rutinen skickar en 1a till utport
+                          392. * Anrop: 		LDAB #4
+                          393. *			JSR OUTONE
+                          394. * Indata: 		Bit nummer i B (0-7)
+                          395. * Utdata: 		Inga
+                          396. * Registerpåverkan: 	CC-registret får påverkas
+                          397. * Anropade subrutiner: 	OUTONE
+                          398. **************************************************************************************
+00217E 36                 399. OUTONE	PSHA
+00217F 34                 400. 	PSHX			Spara register på stacken
+002180 14 10              401. 	SEI			Sätt interrupt flaggan för att förhindra avbrott
+002182 C1 07              402. 	CMPB	#7		Tal större än 7 ogiltigt
+002184 22 0E              403. 	BHI	ONEX		Hoppa ut om > 7
+002186 CE 21 99           404. 	LDX	#ONETAB		Ladda in konverteringstabell
+002189 A6 E5              405. 	LDAA	B,X		Ladda in nya värdet i A
+00218B BA 2F FE           406. 	ORAA	DRCOPY		Ettställ biten i DRCOPY till A
+00218E 7A 2F FE           407. 	STAA	DRCOPY		Spara kopia på status
+002191 7A 04 00           408. 	STAA	DRCTRL		Spara till utport
+002194 10 EF              409. ONEX	CLI			Nollställ interrupt flaggan för att tillåta avbrott
+002196 30                 410. 	PULX
+002197 32                 411. 	PULA
+002198 3D                 412. 	RTS			Return
+                          413. *
+002199 01 02 04 08 10 20  414. ONETAB	FCB	$1,$2,$4,$8,$10,$20,$40,$80	Konverteringstabell
+       40 80            
+                          415. **************************************************************************************                          416. 	USE stop.s12	Inkludera stop rutiner
+---- File: "stop.s12"
+                          417. *************************************************************************************
+                          418. * SUBRUTIN - STOP
+                          419. * Beskrivning: 		Rutinen stoppar borrmotorn, uppdaterar DRCOPY
+                          420. * för att borret skall uppnå rätt hastighet.
+                          421. * Anrop: 		JSR STOP
+                          422. * Indata: 		Inga
+                          423. * Utdata: 		Inga
+                          424. * Registerpåverkan: 	CC-registret får påverkas
+                          425. * Anropade subrutiner: 	OUTONE,DELAY
+                          426. **************************************************************************************
+0021A1 36                 427. STOP	PSHA
+0021A2 37                 428. 	PSHB			Spara register
+                          429. *
+0021A3 C6 02              430. 	LDAB 	#$02		Sätt bitnummer
+0021A5 16 21 AB           431. 	JSR	OUTZERO		Skicka nolla till bit
+0021A8                    432. 	
+0021A8 33                 433. 	PULB
+0021A9 32                 434. 	PULA
+0021AA 3D                 435. 	RTS
+                          436. *************************************************************************************
+                          437. *
+                          438. *************************************************************************************
+                          439. * SUBRUTIN - OUTZERO
+                          440. * Beskrivning: 		Rutinen skickar en 0a till utport
+                          441. * Anrop: 		LDAB #4
+                          442. *			JSR OUTZERO
+                          443. * Indata: 		Bit nummer i B (0-7)
+                          444. * Utdata: 		Inga
+                          445. * Registerpåverkan: 	CC-registret får påverkas
+                          446. * Anropade subrutiner: 	OUTONE,DELAY
+                          447. **************************************************************************************
+0021AB 36                 448. OUTZERO	PSHA
+0021AC 34                 449. 	PSHX
+0021AD 14 10              450. 	SEI			Sätt interrupt flaggan för att förhindra avbrott
+0021AF C1 07              451. 	CMPB	#7		Giltigt värde mindre eller lika med 7
+0021B1 22 0E              452. 	BHI	ZEROX		Gå ut annars
+0021B3 CE 21 C6           453. 	LDX	#ZEROTAB	Ladda in konverteringstabelll
+0021B6 A6 E5              454. 	LDAA	B,X		Ladda in värde i A
+0021B8 B4 2F FE           455. 	ANDA	DRCOPY		Nolla biten i DRCOPY
+0021BB 7A 2F FE           456. 	STAA	DRCOPY		Spara DRCOPY
+0021BE 7A 04 00           457. 	STAA	DRCTRL		Skriv till utport
+0021C1 10 EF              458. ZEROX	CLI			Nollställ interrupt flaggan för att tillåta avbrott
+0021C3 30                 459. 	PULX
+0021C4 32                 460. 	PULA
+0021C5 3D                 461. 	RTS			Return
+                          462. *
+0021C6 FE FC FB F7 EF CF  463. ZEROTAB	FCB	$FE,$FC,$FB,$F7,$EF,$CF,$BF,$7F       BF 7F            
+                          464. 	USE dusa.s12	Inkludera down, up, stop, alarm rutiner
+---- File: "dusa.s12"
+                          465. **************************************************************************************
+                          466. * SUBRUTIN - DOWN
+                          467. * Beskrivning: 		Rutinen sänker borret
+                          468. * 
+                          469. * Anrop: 		JSR DOWN
+                          470. * Indata: 		Inga
+                          471. * Utdata: 		Inga
+                          472. * Registerpåverkan: 	CC-registret får påverkas
+                          473. * Anropade subrutiner: 	OUTONE
+                          474. **************************************************************************************
+0021CE 36                 475. DOWN	PSHA
+0021CF 37                 476. 	PSHB			Spara på stacken
+0021D0 B6 2F FE           477. 	LDAA	DRCOPY		Läs status
+0021D3 84 04              478. 	ANDA	#4		Maska fram bit 2 som visar om motorn är på
+0021D5 81 04              479. 	CMPA	#4		
+0021D7 26 05              480. 	BNE	DOWNX		Om motorn ej är på, sänk ej borret
+0021D9 C6 03              481. 	LDAB	#3		Skicka 1a till bit 3
+0021DB 16 21 7E           482. 	JSR	OUTONE
+0021DE 33                 483. DOWNX	PULB			Hämta tillbaka värden
+0021DF 32                 484. 	PULA
+0021E0 3D                 485. 	RTS			Return
+                          486. **************************************************************************************
+                          487. *
+                          488. **************************************************************************************
+                          489. * SUBRUTIN - UP
+                          490. * Beskrivning: 		Rutinen höjjer borret
+                          491. * 
+                          492. * Anrop: 		JSR UP
+                          493. * Indata: 		Inga
+                          494. * Utdata: 		Inga
+                          495. * Registerpåverkan: 	CC-registret får påverkas
+                          496. * Anropade subrutiner: 	OUTZERO
+                          497. **************************************************************************************
+0021E1 36                 498. UP	PSHA
+0021E2 37                 499. 	PSHB
+0021E3 B6 2F FE           500. 	LDAA	DRCOPY		Läs status
+0021E6 84 08              501. 	ANDA	#8		Maska fram bit 3 som visar om borren är uppe då den är 0
+0021E8 81 08              502. 	CMPA	#8
+0021EA 26 0E              503. 	BNE	UPX		Om uppe, gå ut
+0021EC C6 03              504. 	LDAB	#3		Om nere skicka 0a till bit 3
+0021EE 16 21 AB           505. 	JSR	OUTZERO
+0021F1                    506. 	
+0021F1 B6 04 01           507. UPCHK	LDAA	DRSTAT
+0021F4 84 02              508. 	ANDA	#2
+0021F6 81 02              509. 	CMPA	#2
+0021F8 26 F7              510. 	BNE	UPCHK
+                          511. 
+0021FA 33                 512. UPX	PULB
+0021FB 32                 513. 	PULA
+0021FC 3D                 514. 	RTS
+                          515. **************************************************************************************
+                          516. *
+                          517. **************************************************************************************
+                          518. * SUBRUTIN - STEP
+                          519. * Beskrivning: 		Rutinen stegar arbetsstycket
+                          520. * 
+                          521. * Anrop: 		JSR STEP
+                          522. * Indata: 		Inga
+                          523. * Utdata: 		Inga
+                          524. * Registerpåverkan: 	CC-registret får påverkas
+                          525. * Anropade subrutiner: 	OUTONE, DELAY, OUTZERO
+                          526. **************************************************************************************
+0021FD 36                 527. STEP	PSHA
+0021FE 37                 528. 	PSHB
+0021FF B6 04 01           529. 	LDAA	DRSTAT		Läs status
+002202 84 02              530. 	ANDA	#2
+002204 81 02              531. 	CMPA	#2		Kollar om borret är uppe
+002206 26 1A              532. 	BNE	BEEP		Är borret nere så skickar vi alarm puls sen avslutar rutinen
+002208 C6 01              533. 	LDAB	#1		Sätt riktning på step medurs
+00220A 16 21 7E           534. 	JSR	OUTONE		Mata ut ettan
+00220D C6 00              535. 	LDAB	#0
+00220F 16 21 7E           536. 	JSR	OUTONE		Ettar signalen på bit 0
+002212                    537. 	
+002212 86 01              538. 	LDAA	#1
+002214 16 21 34           539. 	JSR	DELAY		Delay för att hinna läsa pulsen
+002217 16 21 AB           540. 	JSR	OUTZERO		Nollar signalen på bit 0
+00221A 86 04              541. 	LDAA	#4
+00221C 16 21 34           542. 	JSR	DELAY		Delay för att hinna vrida stycket
+                          543. *	
+00221F 33                 544. STEPX	PULB			Exit
+002220 32                 545. 	PULA
+002221 3D                 546. 	RTS
+                          547. *	
+002222 C6 03              548. BEEP	LDAB 	#3		Alarm 3 gånger
+002224 16 22 2A           549. 	JSR	ALARM
+002227 06 22 1F           550. 	JMP	STEPX
+                          551. **************************************************************************************
+                          552. *
+                          553. **************************************************************************************
+                          554. * SUBRUTIN - ALARM
+                          555. * Beskrivning: 		Rutinen ger alarm
+                          556. * 
+                          557. * Anrop: 		LDAB #3
+                          558. *			JSR ALARM
+                          559. * Indata: 		Antal signaler i B
+                          560. * Utdata: 		Inga
+                          561. * Registerpåverkan: 	CC-registret får påverkas
+                          562. * Anropade subrutiner: 	OUTONE, DELAY, OUTZERO
+                          563. **************************************************************************************
+00222A 36                 564. ALARM	PSHA
+00222B 37                 565. 	PSHB
+00222C 34                 566. 	PSHX			Spara värden på stack
+00222D B7 15              567. 	TFR	B,X		Kopiera B till X
+00222F C6 04              568. 	LDAB 	#4	
+                          569. *	
+002231 16 21 7E           570. ALARML	JSR	OUTONE		Skicka etta till bit 4
+002234 86 08              571. 	LDAA	#8		
+002236 16 21 34           572. 	JSR	DELAY		Delay på 0,4 sek
+002239 16 21 AB           573. 	JSR	OUTZERO		Skicka ut signal
+00223C 86 04              574. 	LDAA 	#4		Delay på 0,2 sek
+00223E 16 21 34           575. 	JSR	DELAY
+002241 09                 576. 	DEX
+002242 26 ED              577. 	BNE	ALARML		Alarm loop enligt antal signaler i B
+                          578. *
+002244 30                 579. 	PULX
+002245 33                 580. 	PULB
+002246 32                 581. 	PULA			Hämta värden
+002247 3D                 582. 	RTS			Return
+002248                    583. 	                          584. 	USE drill.s12	Inkludera drill rutiner
+---- File: "drill.s12"
+                          585. *************************************************************************************
+                          586. * SUBRUTIN - DDTEST
+                          587. * Beskrivning: 		Rutinen testar om borren nått botenläge. 
+                          588. *			Om inte så hoppar den tillbaka efter 4 sekunder
+                          589. * Anrop: 		JSR DDTEST
+                          590. * Indata: 		Inga
+                          591. * Utdata: 		Inga
+                          592. * Registerpåverkan: 	CC-registret får påverkas
+                          593. * Anropade subrutiner: 	ALARM,DELAY
+                          594. **************************************************************************************
+002248 36                 595. DDTEST	PSHA
+002249 37                 596. 	PSHB
+00224A 34                 597. 	PSHX			Register till stacken
+00224B CE 00 28           598. 	LDX	#40		Ladda 40 * 10 ms för 4 sekunders delay
+00224E F6 04 01           599. DDLOOP	LDAB	DRSTAT		Hämta status
+002251 C4 04              600. 	ANDB	#4		Maska fram bit 2, som är givaren för bottenläge
+002253 C1 04              601. 	CMPB	#4		Kolla så att bit 2 är 1a, borren i botten
+002255 27 0D              602. 	BEQ	DDX		I botten, exit
+002257 86 02              603. 	LDAA	#2		Sätt 2 * delay för 10ms
+002259 16 21 34           604. 	JSR	DELAY
+00225C 09                 605. 	DEX	
+00225D 26 EF              606. 	BNE	DDLOOP		Loopa och kolla status igen
+00225F C6 02              607. 	LDAB	#2		4 sek har gått, 2 larmsignaler
+002261 16 22 2A           608. 	JSR 	ALARM
+002264 30                 609. DDX	PULX			Hämta tillbaka från stacken
+002265 33                 610. 	PULB
+002266 32                 611. 	PULA
+002267 3D                 612. 	RTS			Return
+                          613. **************************************************************************************
+                          614. * SUBRUTIN - DRILL
+                          615. * Beskrivning: 		Rutinen borrar ett hål.
+                          616. * 
+                          617. * Anrop: 		JSR DRILL
+                          618. * Indata: 		Inga
+                          619. * Utdata: 		Inga
+                          620. * Registerpåverkan: 	CC-registret får påverkas
+                          621. * Anropade subrutiner: 	START,DOWN,DDTEST,UP,STOP
+                          622. **************************************************************************************
+002268 16 21 6F           623. DRILL	JSR	START		Starta borret
+00226B 16 21 CE           624. 	JSR	DOWN		Sänk borret
+00226E 16 22 48           625. 	JSR	DDTEST		Testa så borret är nere
+002271 16 21 E1           626. 	JSR	UP		Ta upp borret
+002274 16 21 A1           627. 	JSR	STOP		Stoppa borret
+002277 3D                 628. 	RTS			Return
+                          629. 
+                          630. 
+                          631. 	USE auto.s12	Inkludera auto rutiner
+---- File: "auto.s12"
+                          632. ********************************************************************************************
+                          633. *SUBRUTIN – REFPO
+                          634. *Beskrivning: 	Rutinen vrider stycket till referenspositionen
+                          635. *Anrop: 	JSR REFPO
+                          636. *Indata: 	Inga
+                          637. *Utdata: 	Inga
+                          638. *Reg-påverkan: 	Register CC
+                          639. *Anr subr: 	STEP
+                          640. ********************************************************************************************
+002278 36                 641. REFPO	PSHA			Spara A på stacken
+002279 B6 04 01           642. RLOOP	LDAA	DRSTAT		Ladda inport till A
+00227C 84 01              643. 	ANDA	#1		Maska bort allt utom bit 0
+00227E 81 01              644. 	CMPA	#1		Jämför med en 1a
+002280 27 06              645. 	BEQ	REFX		Om lika, stycket är i position, exit
+002282 16 21 FD           646. 	JSR	STEP		Om inte lika, steppa
+002285 06 22 79           647. 	JMP	RLOOP		Läs inporten igen
+002288 32                 648. REFX	PULA			Ta tillbaka A
+002289 3D                 649. 	RTS			Return
+                          650. ********************************************************************************************
+                          651. *
+                          652. *********************************************************************************************
+                          653. * SUBRUTIN – NSTEP
+                          654. * Beskrivning: 	Rutinen vrider stycket N antal positioner
+                          655. * Anrop: 	LDAA #4
+                          656. *		JSR NSTEP
+                          657. * Indata: 	Antal sten i A-reg (0-255)
+                          658. * Utdata: 	Inga
+                          659. * Reg-påverkan: Register CC
+                          660. * Anr subr: 	STEP
+                          661. ********************************************************************************************
+00228A 36                 662. NSTEP	PSHA			Spara register på stacken
+                          663. *
+00228B 97                 664. NLOOP	TSTA			Testa A och sätt flaggor
+00228C 27 07              665. 	BEQ	NX		Noll steg, hoppa ut
+00228E 16 21 FD           666. 	JSR	STEP		Stega 1 ste
+002291 43                 667. 	DECA			Minska A med 1
+002292 06 22 8B           668. 	JMP	NLOOP		Testa igen
+                          669. *
+002295 32                 670. NX	PULA			Ta tillbaka A
+002296 3D                 671. 	RTS			Return
+                          672. ********************************************************************************************
+                          673. *
+                          674. *********************************************************************************************
+                          675. * SUBRUTIN – AUTO
+                          676. * Beskrivning: 	Rutinen kör det automatiska programmet
+                          677. * Anrop: 	JSR AUTO
+                          678. * Indata: 	Inga
+                          679. * Utdata: 	Inga
+                          680. * Reg-påverkan: Register CC
+                          681. * Anr subr: 	REFPO, NSTEP, DRILL
+                          682. ********************************************************************************************
+002297 36                 683. AUTO		PSHA
+002298 34                 684. 		PSHX			Spara register på stacken
+                          685. *
+002299 16 22 78           686. 		JSR	REFPO		Gå till referensposition
+                          687. *
+00229C CE 22 B1           688. 		LDX	#PATTERN	Sätt pekare till mönstret
+00229F A6 30              689. AUTOLOOP	LDAA	1,X+		Ladda in värdet i mönstret i A
+0022A1 81 FF              690. 		CMPA	#$FF		FF är slutmarkering, mer att borra?
+0022A3 27 09              691. 		BEQ	AUTOX		Om slutmarkeing, exit
+                          692. *
+0022A5 16 22 8A           693. 		JSR	NSTEP		Steppa antalet steg som ligger i A
+0022A8 16 22 68           694. 		JSR 	DRILL		Borra
+0022AB 06 22 9F           695. 		JMP	AUTOLOOP	Tillbaka till att läsa in nästa A-värde
+                          696. *
+0022AE 30                 697. AUTOX		PULX		
+0022AF 32                 698. 		PULA			Hämta tillbaka sparade REG-värden
+0022B0 3D                 699. 		RTS			Return
+                          700. *
+0022B1 00 01 01 01 01 01  701. PATTERN		FCB	0,1,1,1,1,1,1,1,2,1,5,2,2,2,2,4,4,3,8,2,$FF	Skapa mönstertabell
+       01 01 02 01 05 02
+       02 02 02 04 04 03
+       08 02 FF         
+                          702. *
+                          703. 
+                          704. 
+                          705. 
+                          706. 
+                          707. 
+                          708. 
+                          709. 
+                          710. 
+                          711. 
+                          712. 	USE irqr.s12	Inkludera IRQ rutiner
+---- File: "irqr.s12"
+                          713. ***************************************************************************************
+                          714. * SUBRUTIN - IRQINIT
+                          715. * Beskrivn:		Initierar IRQ-vektorn och nollställer vippor
+                          716. * Anrop ex:		JSR IRQR
+                          717. *
+                          718. * Indata:		Inga
+                          719. * Utdata:		Nollställer vippor, skriver IRQ-adress
+                          720. * Reg-påverkan:		CC-registret får påverkas
+                          721. * Anrop subr:		Inga
+                          722. ***************************************************************************************
+0022C6 3B                 723. IRQINIT	PSHD
+0022C7 CC 22 D7           724. 	LDD	#IRQR		Laddar adress till IRQ-rutinen
+0022CA 7C FF F2           725. 	STD	IRQVEC		Sparar adressen i IRQ-vektorn
+0022CD 7A 0D C2           726. 	STAA 	IRES1		Nollställ nödstoppsvippa
+0022D0 7A 0D C3           727. 	STAA 	IRES2		Nollställ signalvippa
+0022D3 10 EF              728. 	CLI			Nollställ I-flaggan
+0022D5 3A                 729. 	PULD			Ta tillbaka D
+0022D6 3D                 730. 	RTS			Return
+0022D7                    731. 	
+                          732. ***************************************************************************************
+                          733. *
+                          734. ***************************************************************************************
+                          735. * SUBRUTIN - IRQR
+                          736. * Beskrivn:		Läser IRQ-status
+                          737. * Anrop ex:		JSR IRQR
+                          738. *
+                          739. * Indata:		Inga
+                          740. * Utdata:		I-flaggan (kanske)
+                          741. * Reg-påverkan:		CC-registret får påverkas 
+                          742. * Anrop subr:		SIGNAL
+                          743. ***************************************************************************************
+0022D7 36                 744. IRQR	PSHA	
+0022D8 37                 745. 	PSHB			Sparar register på stacken
+0022D9 B6 0D C0           746. 	LDAA	IRQSRC		Läs IRQ status
+0022DC B7 01              747. 	TFR	A,B		Gör en kopia
+0022DE 84 01              748. 	ANDA	#1		Maska bit0
+0022E0 81 01              749. 	CMPA	#1		Kolla om ettställd
+0022E2 27 11              750. 	BEQ	IRQX		Hoppa om 1
+0022E4                    751. 	
+0022E4 C4 02              752. 	ANDB	#2		Maska bit 1
+0022E6 C1 02              753. 	CMPB	#2		Kolla om ettställd
+0022E8 26 08              754. 	BNE	IRQRET		Hoppa om 0
+0022EA 7A 0D C3           755. 	STAA	IRES2		Reset signalvippa
+0022ED 10 EF              756. 	CLI			Nollställ I-flaggan
+0022EF 16 22 FD           757. 	JSR	SIGNAL		Hoppa till signal
+                          758. *	
+0022F2 33                 759. IRQRET	PULB
+0022F3 32                 760. 	PULA
+0022F4 0B                 761. 	RTI			Return
+                          762. *
+0022F5 7A 0D C2           763. IRQX	STAA	IRES1		Reset nödstoppsvippan
+0022F8 33                 764. 	PULB
+0022F9 32                 765. 	PULA
+0022FA 06 20 BE           766. 	JMP	DRPGM		Starta om programmet
+                          767. ***************************************************************************************
+                          768. *
+                          769. ***************************************************************************************
+                          770. * SUBRUTIN - SIGNAL
+                          771. * Beskrivn:		Ger avbrottslarm
+                          772. * Anrop ex:		JSR SIGNAL
+                          773. *
+                          774. * Indata:		Inga
+                          775. * Utdata:		Inga
+                          776. * Reg-påverkan:		Inga
+                          777. * Anrop subr:		ALARM
+                          778. ***************************************************************************************
+0022FD 37                 779. SIGNAL	PSHB			Spara register
+0022FE C6 01              780. 	LDAB	#1		1 signal
+002300 16 22 2A           781. 	JSR	ALARM		Hoppa till ALARM
+002303 33                 782. 	PULB			Ta tillbaka B
+002304 3D                 783. 	RTS			Return                          784. *
+---- File: "main2.s12"
+                          785. *******************************************************************************************
+002305 3D                 786. KEYB2 	RTS 
+002306 3D                 787. COMND2 	RTS
+002307 3D                 788. DELAY2 	RTS
+                          789. *
+                          790. ********************************************************************************************
+                          791. ********************************************************************************************
+                          792. *
+"main2.s12" LINE: 52,WARNING: symbol 'KEYB' is forward referenced from line 115
+       0000 20DD          793. KEYB 	EQU 	KEYB1
+"main2.s12" LINE: 53,WARNING: symbol 'COMND' is forward referenced from line 130
+       0000 214B          794. COMND 	EQU 	COMND1
+"main2.s12" LINE: 54,WARNING: symbol 'DELAY' is forward referenced from line 18
+       0000 2134          795. DELAY 	EQU 	DELAY3
+                          796. ********************************************************************************************

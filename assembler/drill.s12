@@ -1,0 +1,46 @@
+*************************************************************************************
+* SUBRUTIN - DDTEST
+* Beskrivning: 		Rutinen testar om borren nått botenläge. 
+*			Om inte så hoppar den tillbaka efter 4 sekunder
+* Anrop: 		JSR DDTEST
+* Indata: 		Inga
+* Utdata: 		Inga
+* Registerpåverkan: 	CC-registret får påverkas
+* Anropade subrutiner: 	ALARM,DELAY
+**************************************************************************************
+DDTEST	PSHA
+	PSHB
+	PSHX			Register till stacken
+	LDX	#40		Ladda 40 * 10 ms för 4 sekunders delay
+DDLOOP	LDAB	DRSTAT		Hämta status
+	ANDB	#4		Maska fram bit 2, som är givaren för bottenläge
+	CMPB	#4		Kolla så att bit 2 är 1a, borren i botten
+	BEQ	DDX		I botten, exit
+	LDAA	#2		Sätt 2 * delay för 10ms
+	JSR	DELAY
+	DEX	
+	BNE	DDLOOP		Loopa och kolla status igen
+	LDAB	#2		4 sek har gått, 2 larmsignaler
+	JSR 	ALARM
+DDX	PULX			Hämta tillbaka från stacken
+	PULB
+	PULA
+	RTS			Return
+**************************************************************************************
+* SUBRUTIN - DRILL
+* Beskrivning: 		Rutinen borrar ett hål.
+* 
+* Anrop: 		JSR DRILL
+* Indata: 		Inga
+* Utdata: 		Inga
+* Registerpåverkan: 	CC-registret får påverkas
+* Anropade subrutiner: 	START,DOWN,DDTEST,UP,STOP
+**************************************************************************************
+DRILL	JSR	START		Starta borret
+	JSR	DOWN		Sänk borret
+	JSR	DDTEST		Testa så borret är nere
+	JSR	UP		Ta upp borret
+	JSR	STOP		Stoppa borret
+	RTS			Return
+
+

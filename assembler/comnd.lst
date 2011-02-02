@@ -1,0 +1,50 @@
+QA12 - MC68HC12 Absolute crossassembler, Version 1.6.2
+(c) GMV 1989-2010
+
+
+File: comnd.lst
+                            1. *******************************************************************************************
+                            2. * SUBRUTIN - COMND
+                            3. *Beskrivning: Rutinen avgör vilken kommandosubrutin som skall anropas och anropar denna.
+                            4. *Anrop ex: LDAB #5 Sätt kommando nummer 5
+                            5. * JSR COMND Kommando nr 5 utförs
+                            6. *Indata: Kommandonummer i reg B
+                            7. *Utdata: Inga
+                            8. *Reg-påverkan: CC-registret får påverkas
+                            9. *Anrop subr: SUB0 - SUB7
+                           10. *******************************************************************************************
+       0000 0007           11. MAX 	EQU 7 Maxvärde för kommandonummer
+000000 37                  12. COMND1 	PSHB Spara register på stack
+000001 34                  13. 	PSHX A, B och X till stacken
+                           14. *
+000002 C1 07               15. 	CMPB #MAX Giltigt värde?
+000004 22 08               16. 	BHI COMEX Nej, hoppa ut
+                           17. *
+000006 CE 00 11            18. 	LDX #JUMPTAB Ja, pekare till hopptabell
+000009 58                  19. 	ASLB 2 bytes per adress
+00000A EE E5               20. 	LDX B,X Hämta hoppadress från tabell
+                           21. *
+00000C 15 00               22. 	JSR ,X Utför kommandosubrutin
+                           23. *
+00000E 30                  24. COMEX 	PULX Återställ register
+00000F 33                  25. 	PULB
+000010 3D                  26. 	RTS
+                           27. *
+                           28. *******************************************************************************************
+                           29. * Tabell med subrutinadresser
+                           30. *
+000011 00 21 00 22 00 23   31. JUMPTAB FDB SUB0,SUB1,SUB2,SUB3,SUB4,SUB5,SUB6,SUB7
+       00 24 00 25 00 26
+       00 27 00 28      
+                           32. *******************************************************************************************
+000021 3D                  33. SUB0 RTS Tomma subrutiner
+000022 3D                  34. SUB1 RTS
+000023 3D                  35. SUB2 RTS
+000024 3D                  36. SUB3 RTS
+000025 3D                  37. SUB4 RTS
+000026 3D                  38. SUB5 RTS
+000027 3D                  39. SUB6 RTS
+000028 3D                  40. SUB7 RTS
+                           41. *******************************************************************************************
+                           42. *
+                           43. *******************************************************************************************

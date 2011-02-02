@@ -1,0 +1,43 @@
+*******************************************************************************************
+* SUBRUTIN - COMND
+*Beskrivning: 	Rutinen avgör vilken kommandosubrutin som skall anropas och anropar denna.
+*Anrop ex: 	LDAB #5 Sätt kommando nummer 5
+* 		JSR COMND Kommando nr 5 utförs
+*Indata: 	Kommandonummer i reg B
+*Utdata: 	Inga
+*Reg-påverkan: 	CC-registret får påverkas
+*Anrop subr: 	SUB0 - SUB7
+*******************************************************************************************
+MAX 	EQU 	7 		Maxvärde för kommandonummer
+COMND1 	PSHB 			Spara register på stack
+	PSHX 			A, B och X till stacken
+*
+	CMPB 	#MAX 		Giltigt värde?
+	BHI 	COMEX 		Nej, hoppa ut
+*
+	LDX	#JUMPTAB 	Ja, pekare till hopptabell
+	ASLB 			2 bytes per adress
+	LDX B,X 		Hämta hoppadress från tabell
+*
+	JSR ,X 			Utför kommandosubrutin
+*
+COMEX 	PULX 			Återställ register
+	PULB
+	RTS
+*
+*******************************************************************************************
+* Tabell med subrutinadresser
+*
+JUMPTAB FDB START,STOP,DOWN,UP,STEP,DRILL,AUTO,SUB7
+*******************************************************************************************
+SUB0 	RTS Tomma subrutiner
+SUB1 	RTS
+*DOWN 	RTS
+*UP	RTS
+*STEP 	RTS
+*DRILL 	RTS
+*AUTO	RTS
+SUB7 	RTS
+*******************************************************************************************
+*
+*******************************************************************************************
