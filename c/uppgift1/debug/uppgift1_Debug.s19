@@ -1,0 +1,49 @@
+S0030000FC
+S10F1000A7CF2FFF16100CA720FDA76936
+S10F100C1B9FF606006B807B040020F69E
+S9031000EC
+SX:C:s:__start
+SX:C:M:Main$Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Main.c
+SX:C:S:F:Main:main:_main:(typ11)
+SX:C:S:F:Main:__func__:___func__:(typ11)
+SX:C:S:L:Main:main:c:0:(typ3)
+SX:C:T:  typ0 V (-1)
+SX:C:T:  typ1 L (4)
+SX:C:T:  typ2 l (4)
+SX:C:T:  typ3 C (1)
+SX:C:T:  typ4 c (1)
+SX:C:T:  typ5 S (2)
+SX:C:T:  typ6 s (2)
+SX:C:T:  typ7 g (4)
+SX:C:T:  typ8 G (4)
+SX:C:T:  typ9 h (4)
+SX:C:T:  typ10 R (2)
+SX:C:T:  typ11 I (2)
+SX:C:T:  typ12 i (2)
+SX:C:T:  typ13 E (2)
+SX:C:T:  typ14 F (2)
+SX:C:T:  typ15 P (2)
+SX:C:T: typ2 l (4)
+SX:C:T: typ4 c (1)
+SX:C:T: typ6 s (2)
+SX:A:M:Init$Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm
+SX:C:T: typ2 l (4)
+SX:C:T: typ4 c (1)
+SX:C:T: typ6 s (2)
+SX:A:X:Init:7:1000
+SX:A:X:Init:8:1001
+SX:A:X:Init:9:1004
+SX:A:X:Init:10:1007
+SX:A:X:Init:11:1008
+SX:A:X:Init:12:100A
+SX:A:F:Init:__start:1000:7
+SX:A:E:Init:__start:100A:12
+SX:C:F:Main:_main:0000100C:3
+SX:C:X:Main:3:1:100C
+SX:C:X:Main:6:2:100E
+SX:C:X:Main:9:5:100E
+SX:C:X:Main:12:2:1013
+SX:C:X:Main:16:2:1018
+SX:C:X:Main:17:1:1018
+SX:C:Z:Main:17:1:1018
+SX:C:E:Main:_main:00001018:17

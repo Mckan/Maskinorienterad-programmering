@@ -2,8 +2,16 @@
 
 int main() 
 {
-  // Läs inport
-  // Giltigt värde?
-  // Skriv till utport
+  char c;
+  while(1) 
+  {
+    // Läs inport
+    c = ML4READ;
+ 
+    // Skriv till utport
+    ML4WRITE = c;
+  
+  }
+  
   return 0;
 }

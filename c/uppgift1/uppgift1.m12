@@ -4,6 +4,7 @@
 #
 #-----------------------------------------------
 #SETTINGS SECTION
+##CSIMSET=".\ML4simple.hc12sim"
 ##EXTMAKEFILE=""
 ##EXTMAKEFILEPARAM=""
 #+[BackCol(0)]=
@@ -42,6 +43,8 @@
 ##OTYPE=1
 #-----------------------------------------------
 #OPEN FILE SECTION
+##OF ".\src\Main.c"
+##OF ".\src\Init.asm"
 #-----------------------------------------------
 #PROJECT FILES SECTION
 

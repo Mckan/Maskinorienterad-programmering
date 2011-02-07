@@ -1,0 +1,65 @@
+QLD (Version 4.8.0)- Link/Load Summary: 'debug\uppgift1_Debug.s19'
+SCRIPT FILES FROM THE FOLLOWING PATH(S):
+  'C:/Program Files/GMV/EducDist/config/xcc12'
+
+SCRIPT READ FROM THE FOLLOWING FILE(S):
+  'default.lsc'
+
+---------------------------
+ SEARCHED LIBRARIES:
+ 'C:/Program Files/GMV/EducDist/lib/xcc12/libcd.e12'
+ 'C:/Program Files/GMV/EducDist/lib/xcc12/libed.e12'
+ 'C:/Program Files/GMV/EducDist/lib/xcc12/librtkd.e12'
+ 'C:/Program Files/GMV/EducDist/lib/xcc12/libccd.e12'
+
+---------------------------
+ PROGRAM ENTRY:'__start'
+---------------------------
+ GROUPS AND SEGMENTS:
+
+  GROUP 'test_group', READ ONLY ,allocation to: 00001000 - 00001017, (size: 24 Bytes)
+   00001000 0000100B 'init'
+   0000100C 00001017 'text'
+
+  GROUP 'interrupt_vectors', READ ONLY
+   NO SEGMENTS
+
+  GROUP 'const_group',
+   NO SEGMENTS
+---------------------------
+LINKER DEFINED CONSTANTS:
+   __rom_code_enabled = 0
+   __heap_start = 00000000
+  from segment 'text'
+   0000100C '__text__start'
+   00001018 '__text__end'
+   0000000C '__text__size'
+  from segment 'bss'
+   00000000 '__bss__start'
+   00000000 '__bss__end'
+   00000000 '__bss__size'
+  from segment 'data'
+   00000000 '__data__start'
+   00000000 '__data__end'
+   00000000 '__data__size'
+  from segment 'rodata'
+   00000000 '__rodata__start'
+   00000000 '__rodata__end'
+   00000000 '__rodata__size'
+  from segment 'init'
+   00001000 '__init__start'
+   0000100C '__init__end'
+   0000000C '__init__size'
+---------------------------
+GLOBAL SYMBOL(S):
+
+ in module: 'Main' of type 'O12' defined in file 'Main.o12'
+  in segment: 'text'
+   0000100C '_main'
+
+ in module: 'Init' of type 'O12' defined in file 'Init.o12'
+  in segment: 'init'
+   00001007 '_exit'
+   00001000 '__start'
+---
+ End of listfile
