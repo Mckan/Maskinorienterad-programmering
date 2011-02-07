@@ -45,7 +45,10 @@
 #-----------------------------------------------
 #PROJECT FILES SECTION
 
-FILES=
+FILES= \
+	".\src\Ports.h" "" "1"  \
+	".\src\Main.c" "" "1"  \
+	".\src\Init.asm" "" "1" 
 #-----------------------------------------------
 #PROJECT OPTIONS SECTION
 
@@ -61,7 +64,9 @@ LNFLAGS=-g -i default.lsc
 #-----------------------------------------------
 #OBJECT FILES SECTION
 
-OBJ=
+OBJ= \
+	"debug\Main.o12" \
+	"debug\Init.o12"
 #-----------------------------------------------
 #DEFINES/UNDEFINES SECTION
 
@@ -115,11 +120,22 @@ LIBPATH=
 # Clean
 clean:
 	RMFI "debug\uppgift1_Debug.s19"
+	RMFI "debug\Ports.o12"
+	RMFI "debug\Main.o12"
+	RMFI "debug\Init.o12"
 #-----------------------------------------------
 
 
 # Dependencies and their build rules
 
+"debug\Main.o12":	\
+	"Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Main.c"\
+	"Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Ports.h"
+	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
+	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"debug\Main.o12" "Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Main.c"
+"debug\Init.o12":	\
+	"Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm"
+	ASSM  $(ASFLAGS) $(ASMDEF) -o"debug\Init.o12" "Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm"
 !EICONF	Debug
 
 !IFCONF	Final
@@ -134,7 +150,9 @@ LNFLAGS=-i default.lsc
 #-----------------------------------------------
 #OBJECT FILES SECTION
 
-OBJ=
+OBJ= \
+	"final\Main.o12" \
+	"final\Init.o12"
 #-----------------------------------------------
 #DEFINES/UNDEFINES SECTION
 
@@ -184,9 +202,20 @@ LIBPATH=
 # Clean
 clean:
 	RMFI "final\uppgift1_Final.s19"
+	RMFI "final\Ports.o12"
+	RMFI "final\Main.o12"
+	RMFI "final\Init.o12"
 #-----------------------------------------------
 
 
 # Dependencies and their build rules
 
+"final\Main.o12":	\
+	"Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Main.c"\
+	"Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Ports.h"
+	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
+	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"final\Main.o12" "Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Main.c"
+"final\Init.o12":	\
+	"Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm"
+	ASSM  $(ASFLAGS) $(ASMDEF) -o"final\Init.o12" "Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm"
 !EICONF	Final
