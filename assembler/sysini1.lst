@@ -4,12 +4,12 @@ QA12 - MC68HC12 Absolute crossassembler, Version 1.6.2
 
 File: sysini1.lst
        0000 2000            1. BEGIN 	EQU 	$2000 	BEGIN är startadressen för RWM
----- File: "Z:\MOP\lab1_3\sysini1.s12"
+---- File: "Z:\Git\Maskinorienterad-programmering\assembler\sysini1.s12"
        0000 2F00            2. BOS	EQU	$2F00 	BOS är Bottom Of Stack
        0000 2FFF            3. COMNR 	EQU 	$2FFF 	COMNR är kommandonumret
        0000 2FFE            4. DRCOPY 	EQU 	$2FFE 	DRCOPY är en kopia av senaste styrord
        0000 0400            5. DRCTRL 	EQU 	$0400 	Utport för styrordet till borrmaskinen
-       0000 0401            6. DRSTAT	EQU	$0401 	Inport för givare ISL
+       0000 0401            6. DRSTAT	EQU	$0401 	ISL
                             7. *DRSTAT 	EQU 	$0600 	Inport för givare på borrmaskinen IRL
        0000 0DC2            8. IRES1	EQU	$0DC2	Nödstoppsvippan	
        0000 0DC3            9. IRES2	EQU	$0DC3	Signalvippan

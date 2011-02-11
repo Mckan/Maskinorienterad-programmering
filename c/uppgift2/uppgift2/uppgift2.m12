@@ -47,14 +47,15 @@
 #PROJECT FILES SECTION
 
 FILES= \
-	".\src\Ports.h" "" "1"  \
-	".\src\Main.c" "" "1"  \
-	".\src\Init.asm" "" "1" 
+	"..\..\uppgift1\src\Init.asm" "" "1"  \
+	".\src\ports.h" "" "1"  \
+	".\src\keyboardML15.c" "" "1"  \
+	".\src\keyboardML15.h" "" "1" 
 #-----------------------------------------------
 #PROJECT OPTIONS SECTION
 
 !IFCONF	Debug
-##TARGETNAME="uppgift1_Debug"
+##TARGETNAME="uppgift2_Debug"
 ##OBJDIR="debug"
 ##TARGDIR="debug"
 ##STDINCPATH=1
@@ -66,8 +67,8 @@ LNFLAGS=-g -i default.lsc
 #OBJECT FILES SECTION
 
 OBJ= \
-	"debug\Main.o12" \
-	"debug\Init.o12"
+	"debug\Init.o12" \
+	"debug\keyboardML15.o12"
 #-----------------------------------------------
 #DEFINES/UNDEFINES SECTION
 
@@ -113,34 +114,36 @@ LIBPATH=
 #RULES SECTION CONFIGURATION 
 
 # Application
-"debug\uppgift1_Debug.s19": $(OBJ)
-	LINK -o"debug\uppgift1_Debug.s19" $(LNFLAGS)  $(LIBPATH) $(LIB) -L"C:\Program Files\GMV\EducDist\bin\..\lib\xcc12" -l"C:\Program Files\GMV\EducDist\bin\..\lib\xcc12\libccd.e12"  $(OBJ)
+"debug\uppgift2_Debug.s19": $(OBJ)
+	LINK -o"debug\uppgift2_Debug.s19" $(LNFLAGS)  $(LIBPATH) $(LIB) -L"C:\Program Files\GMV\EducDist\bin\..\lib\xcc12" -l"C:\Program Files\GMV\EducDist\bin\..\lib\xcc12\libccd.e12"  $(OBJ)
 #-----------------------------------------------
 
 
 # Clean
 clean:
-	RMFI "debug\uppgift1_Debug.s19"
-	RMFI "debug\Ports.o12"
-	RMFI "debug\Main.o12"
+	RMFI "debug\uppgift2_Debug.s19"
 	RMFI "debug\Init.o12"
+	RMFI "debug\ports.o12"
+	RMFI "debug\keyboardML15.o12"
+	RMFI "debug\keyboardML15.o12"
 #-----------------------------------------------
 
 
 # Dependencies and their build rules
 
-"debug\Main.o12":	\
-	"Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Main.c"\
-	"Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Ports.h"
-	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
-	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"debug\Main.o12" "Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Main.c"
 "debug\Init.o12":	\
 	"Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm"
 	ASSM  $(ASFLAGS) $(ASMDEF) -o"debug\Init.o12" "Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm"
+"debug\keyboardML15.o12":	\
+	"Z:/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/keyboardML15.c"\
+	"Z:/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/keyboardML15.h"\
+	"Z:/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/ports.h"
+	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
+	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"debug\keyboardML15.o12" "Z:/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/keyboardML15.c"
 !EICONF	Debug
 
 !IFCONF	Final
-##TARGETNAME="uppgift1_Final"
+##TARGETNAME="uppgift2_Final"
 ##OBJDIR="final"
 ##TARGDIR="final"
 ##STDINCPATH=1
@@ -152,8 +155,8 @@ LNFLAGS=-i default.lsc
 #OBJECT FILES SECTION
 
 OBJ= \
-	"final\Main.o12" \
-	"final\Init.o12"
+	"final\Init.o12" \
+	"final\keyboardML15.o12"
 #-----------------------------------------------
 #DEFINES/UNDEFINES SECTION
 
@@ -195,28 +198,30 @@ LIBPATH=
 #RULES SECTION CONFIGURATION 
 
 # Application
-"final\uppgift1_Final.s19": $(OBJ)
-	LINK -o"final\uppgift1_Final.s19" $(LNFLAGS)  $(LIBPATH) $(LIB) -L"C:\Program Files\GMV\EducDist\bin\..\lib\xcc12" -l"C:\Program Files\GMV\EducDist\bin\..\lib\xcc12\libcc.e12"  $(OBJ)
+"final\uppgift2_Final.s19": $(OBJ)
+	LINK -o"final\uppgift2_Final.s19" $(LNFLAGS)  $(LIBPATH) $(LIB) -L"C:\Program Files\GMV\EducDist\bin\..\lib\xcc12" -l"C:\Program Files\GMV\EducDist\bin\..\lib\xcc12\libcc.e12"  $(OBJ)
 #-----------------------------------------------
 
 
 # Clean
 clean:
-	RMFI "final\uppgift1_Final.s19"
-	RMFI "final\Ports.o12"
-	RMFI "final\Main.o12"
+	RMFI "final\uppgift2_Final.s19"
 	RMFI "final\Init.o12"
+	RMFI "final\ports.o12"
+	RMFI "final\keyboardML15.o12"
+	RMFI "final\keyboardML15.o12"
 #-----------------------------------------------
 
 
 # Dependencies and their build rules
 
-"final\Main.o12":	\
-	"Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Main.c"\
-	"Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Ports.h"
-	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
-	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"final\Main.o12" "Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Main.c"
 "final\Init.o12":	\
 	"Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm"
 	ASSM  $(ASFLAGS) $(ASMDEF) -o"final\Init.o12" "Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm"
+"final\keyboardML15.o12":	\
+	"Z:/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/keyboardML15.c"\
+	"Z:/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/keyboardML15.h"\
+	"Z:/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/ports.h"
+	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
+	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"final\keyboardML15.o12" "Z:/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/keyboardML15.c"
 !EICONF	Final

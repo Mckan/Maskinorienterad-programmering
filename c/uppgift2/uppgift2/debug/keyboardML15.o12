@@ -1,0 +1,67 @@
+mod:keyboardML15:O12:keyboardML15.o12
+seg:text:72
+seg:bss:0
+seg:data:16
+seg:rodata:0
+C:text	1600007B040020F8
+C:text	1B9C87C76C80F609C06B82E682C18024
+C:text	1FEC808C00002611E68287CE00001AE6
+C:text	E6006B83CC00016C80F609C06B8220DB
+C:text	EC808C000127041820FFCBE6831B843D
+C:data	0004080C0105090D02060A0E03070B0F
+RG:text:keyboardML15:00000001:O:W:_ML15_Keyboard:53
+RG:text:keyboardML15:00000024:O:W:_keytab:120
+G:text:keyboardML15:00000000:_main
+G:data:keyboardML15:00000000:_keytab
+G:text:keyboardML15:00000008:_ML15_Keyboard
+SY:C:M:keyboardML15$Z:/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/keyboardML15.c
+SY:C:S:G:keyboardML15:keytab:_keytab:(typ16-keyboardML15)
+SY:C:F:keyboardML15:text:_main:00000000:4
+SY:C:X:keyboardML15:4:1:text:0
+SY:C:X:keyboardML15:6:2:text:0
+SY:C:X:keyboardML15:7:2:text:0
+SY:C:X:keyboardML15:10:1:text:8
+SY:C:Z:keyboardML15:10:1:text:8
+SY:C:E:keyboardML15:text:_main:00000008:10
+SY:C:F:keyboardML15:text:_ML15_Keyboard:00000008:14
+SY:C:X:keyboardML15:14:1:text:8
+SY:C:S:F:keyboardML15:ML15_Keyboard:_ML15_Keyboard:(typ4)(typ0)
+SY:C:S:F:keyboardML15:__func__:___func__:(typ11)
+SY:C:S:L:keyboardML15:ML15_Keyboard:key:3:(typ4)
+SY:C:S:L:keyboardML15:ML15_Keyboard:k:2:(typ4)
+SY:C:S:L:keyboardML15:ML15_Keyboard:keyIsSet:0:(typ11)
+SY:C:X:keyboardML15:19:16:text:A
+SY:C:X:keyboardML15:21:2:text:E
+SY:C:X:keyboardML15:23:5:text:E
+SY:C:X:keyboardML15:25:4:text:13
+SY:C:X:keyboardML15:28:22:text:19
+SY:C:X:keyboardML15:31:9:text:20
+SY:C:X:keyboardML15:32:9:text:2C
+SY:C:X:keyboardML15:34:7:text:31
+SY:C:X:keyboardML15:36:20:text:38
+SY:C:X:keyboardML15:37:7:text:3F
+SY:C:X:keyboardML15:39:2:text:43
+SY:C:X:keyboardML15:41:1:text:45
+SY:C:Z:keyboardML15:41:1:text:45
+SY:C:E:keyboardML15:text:_ML15_Keyboard:00000048:41
+SY:C:T:  typ0 V (-1)
+SY:C:T:  typ1 L (4)
+SY:C:T:  typ2 l (4)
+SY:C:T:  typ3 C (1)
+SY:C:T:  typ4 c (1)
+SY:C:T:  typ5 S (2)
+SY:C:T:  typ6 s (2)
+SY:C:T:  typ7 g (4)
+SY:C:T:  typ8 G (4)
+SY:C:T:  typ9 h (4)
+SY:C:T:  typ10 R (2)
+SY:C:T:  typ11 I (2)
+SY:C:T:  typ12 i (2)
+SY:C:T:  typ13 E (2)
+SY:C:T:  typ14 F (2)
+SY:C:T:  typ15 P (2)
+SY:C:T:keyboardML15: typ16-keyboardML15 A (16)(typ4)
+SY:C:T: typ2 l (4)
+SY:C:T: typ4 c (1)
+SY:C:T: typ6 s (2)
+e

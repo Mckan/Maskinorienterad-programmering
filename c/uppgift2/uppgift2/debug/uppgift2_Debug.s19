@@ -1,0 +1,70 @@
+S0030000FC
+S10F1000A7CF2FFF16100CA720FDA77926
+S123100C1610147B040020F81B9C87C76C80F609C06B82E682C180241FEC808C0000261137
+S123102CE68287CE10541AE6E6006B83CC00016C80F609C06B8220DBEC808C00012704180F
+S10B104C20FFCBE6831B843D69
+S11310540004080C0105090D02060A0E03070B0F10
+S9031000EC
+SX:C:s:__start
+SX:A:M:Init$Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm
+SX:C:T: typ2 l (4)
+SX:C:T: typ4 c (1)
+SX:C:T: typ6 s (2)
+SX:C:M:keyboardML15$Z:/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/keyboardML15.c
+SX:C:S:F:keyboardML15:ML15_Keyboard:_ML15_Keyboard:(typ4)(typ0)
+SX:C:S:F:keyboardML15:__func__:___func__:(typ11)
+SX:C:S:L:keyboardML15:ML15_Keyboard:key:3:(typ4)
+SX:C:S:L:keyboardML15:ML15_Keyboard:k:2:(typ4)
+SX:C:S:L:keyboardML15:ML15_Keyboard:keyIsSet:0:(typ11)
+SX:C:T:  typ0 V (-1)
+SX:C:T:  typ1 L (4)
+SX:C:T:  typ2 l (4)
+SX:C:T:  typ3 C (1)
+SX:C:T:  typ4 c (1)
+SX:C:T:  typ5 S (2)
+SX:C:T:  typ6 s (2)
+SX:C:T:  typ7 g (4)
+SX:C:T:  typ8 G (4)
+SX:C:T:  typ9 h (4)
+SX:C:T:  typ10 R (2)
+SX:C:T:  typ11 I (2)
+SX:C:T:  typ12 i (2)
+SX:C:T:  typ13 E (2)
+SX:C:T:  typ14 F (2)
+SX:C:T:  typ15 P (2)
+SX:C:T:keyboardML15: typ16-keyboardML15 A (16)(typ4)
+SX:C:T: typ2 l (4)
+SX:C:T: typ4 c (1)
+SX:C:T: typ6 s (2)
+SX:A:X:Init:7:1000
+SX:A:X:Init:8:1001
+SX:A:X:Init:9:1004
+SX:A:X:Init:10:1007
+SX:A:X:Init:11:1008
+SX:A:X:Init:12:100A
+SX:A:F:Init:__start:1000:7
+SX:A:E:Init:__start:100A:12
+SX:C:F:keyboardML15:_main:0000100C:4
+SX:C:X:keyboardML15:4:1:100C
+SX:C:X:keyboardML15:6:2:100C
+SX:C:X:keyboardML15:7:2:100C
+SX:C:X:keyboardML15:10:1:1014
+SX:C:Z:keyboardML15:10:1:1014
+SX:C:E:keyboardML15:_main:00001014:10
+SX:C:F:keyboardML15:_ML15_Keyboard:00001014:14
+SX:C:X:keyboardML15:14:1:1014
+SX:C:X:keyboardML15:19:16:1016
+SX:C:X:keyboardML15:21:2:101A
+SX:C:X:keyboardML15:23:5:101A
+SX:C:X:keyboardML15:25:4:101F
+SX:C:X:keyboardML15:28:22:1025
+SX:C:X:keyboardML15:31:9:102C
+SX:C:X:keyboardML15:32:9:1038
+SX:C:X:keyboardML15:34:7:103D
+SX:C:X:keyboardML15:36:20:1044
+SX:C:X:keyboardML15:37:7:104B
+SX:C:X:keyboardML15:39:2:104F
+SX:C:X:keyboardML15:41:1:1051
+SX:C:Z:keyboardML15:41:1:1051
+SX:C:E:keyboardML15:_ML15_Keyboard:00001054:41
+SX:C:S:G:keyboardML15:keytab:_keytab:00001054:(typ16-keyboardML15)
