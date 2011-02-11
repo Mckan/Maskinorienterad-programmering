@@ -31,11 +31,11 @@ unsigned char ML15_Keyboard(void)
         key = keytab[k];
         keyIsSet = 1;
       }
+      // Läs inport igen för att testa bit 7
       k = KEYBOARD;
     }
     if(keyIsSet == 1)
       break;
   }
   return key;
-  
 }
