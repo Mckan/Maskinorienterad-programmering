@@ -1,0 +1,20 @@
+mod:Init:O12:Init.o12
+seg:text:0
+seg:init:11
+C:init	A7CF2FFF160000A720FDA7
+RG:init:Init:00000005:O:W:_main:9
+G:init:Init:00000007:_exit
+G:init:Init:00000000:__start
+SY:A:M:Init$Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/Init.asm
+SY:A:X:Init:7:init:0
+SY:A:X:Init:8:init:1
+SY:A:X:Init:9:init:4
+SY:A:X:Init:10:init:7
+SY:A:X:Init:11:init:8
+SY:A:X:Init:12:init:A
+SY:C:T: typ2 l (4)
+SY:C:T: typ4 c (1)
+SY:C:T: typ6 s (2)
+SY:A:F:Init:init:__start:00000000:7
+SY:A:E:Init:init:__start:A:12
+e

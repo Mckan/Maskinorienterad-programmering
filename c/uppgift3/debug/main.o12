@@ -1,0 +1,77 @@
+mod:main:O12:main.o12
+seg:text:61
+seg:bss:0
+seg:data:0
+seg:rodata:0
+C:text	1600001600007B000087C106221D59CE
+C:text	000005E71600002012160000200D1600
+C:text	00200816000020031600001820FFD4
+C:text	0000000000000000000000000000
+RG:text:main:00000001:O:W:_init:30
+RG:text:main:00000004:O:W:_ML15_Keyboard:39
+RG:text:main:00000007:O:W:_comnr:40
+RG:text:main:00000015:O:W:_start:56
+RG:text:main:0000001A:O:W:_stop:67
+RG:text:main:0000001F:O:W:_down:78
+RG:text:main:00000024:O:W:_up:89
+RG:text:main:00000029:O:W:_step:100
+RL:text:main:00000010:O:W:0000002F:text:47
+RL:text:main:0000002F:O:W:00000014:text:134
+RL:text:main:00000031:O:W:00000019:text:134
+RL:text:main:00000033:O:W:0000001E:text:134
+RL:text:main:00000035:O:W:00000023:text:134
+RL:text:main:00000037:O:W:00000028:text:134
+RL:text:main:00000039:O:W:0000002B:text:134
+RL:text:main:0000003B:O:W:0000002B:text:134
+G:text:main:00000000:_main
+SY:C:M:main$Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/main.c
+SY:C:F:main:text:_main:00000000:7
+SY:C:X:main:7:1:text:0
+SY:C:X:main:9:3:text:0
+SY:C:X:main:10:2:text:3
+SY:C:X:main:14:4:text:3
+SY:C:X:main:15:3:text:9
+SY:C:X:main:18:6:text:14
+SY:C:X:main:19:9:text:14
+SY:C:X:main:20:9:text:17
+SY:C:X:main:23:6:text:19
+SY:C:X:main:24:9:text:19
+SY:C:X:main:25:9:text:1C
+SY:C:X:main:28:6:text:1E
+SY:C:X:main:29:9:text:1E
+SY:C:X:main:30:9:text:21
+SY:C:X:main:33:6:text:23
+SY:C:X:main:34:9:text:23
+SY:C:X:main:35:9:text:26
+SY:C:X:main:38:6:text:28
+SY:C:X:main:39:9:text:28
+SY:C:X:main:40:9:text:2B
+SY:C:X:main:43:6:text:2B
+SY:C:X:main:44:9:text:2B
+SY:C:X:main:47:6:text:2B
+SY:C:X:main:48:9:text:2B
+SY:C:X:main:51:6:text:2B
+SY:C:X:main:52:9:text:2B
+SY:C:X:main:59:1:text:2F
+SY:C:Z:main:59:1:text:2F
+SY:C:E:main:text:_main:0000003D:59
+SY:C:T:  typ0 V (-1)
+SY:C:T:  typ1 L (4)
+SY:C:T:  typ2 l (4)
+SY:C:T:  typ3 C (1)
+SY:C:T:  typ4 c (1)
+SY:C:T:  typ5 S (2)
+SY:C:T:  typ6 s (2)
+SY:C:T:  typ7 g (4)
+SY:C:T:  typ8 G (4)
+SY:C:T:  typ9 h (4)
+SY:C:T:  typ10 R (2)
+SY:C:T:  typ11 I (2)
+SY:C:T:  typ12 i (2)
+SY:C:T:  typ13 E (2)
+SY:C:T:  typ14 F (2)
+SY:C:T:  typ15 P (2)
+SY:C:T: typ2 l (4)
+SY:C:T: typ4 c (1)
+SY:C:T: typ6 s (2)
+e

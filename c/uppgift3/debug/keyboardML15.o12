@@ -1,0 +1,57 @@
+mod:keyboardML15:O12:keyboardML15.o12
+seg:text:64
+seg:bss:0
+seg:data:16
+seg:rodata:0
+C:text	1B9C87C76C80F609C06B82E682C18024
+C:text	1FEC808C00002611E68287CE00001AE6
+C:text	E6006B83CC00016C80F609C06B8220DB
+C:text	EC808C000127041820FFCBE6831B843D
+C:data	0004080C0105090D02060A0E03070B0F
+RG:text:keyboardML15:0000001C:O:W:_keytab:92
+G:data:keyboardML15:00000000:_keytab
+G:text:keyboardML15:00000000:_ML15_Keyboard
+SY:C:M:keyboardML15$Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/keyboardML15.c
+SY:C:S:G:keyboardML15:keytab:_keytab:(typ16-keyboardML15)
+SY:C:F:keyboardML15:text:_ML15_Keyboard:00000000:6
+SY:C:X:keyboardML15:6:1:text:0
+SY:C:S:F:keyboardML15:ML15_Keyboard:_ML15_Keyboard:(typ4)(typ0)
+SY:C:S:F:keyboardML15:__func__:___func__:(typ11)
+SY:C:S:L:keyboardML15:ML15_Keyboard:key:3:(typ4)
+SY:C:S:L:keyboardML15:ML15_Keyboard:k:2:(typ4)
+SY:C:S:L:keyboardML15:ML15_Keyboard:keyIsSet:0:(typ11)
+SY:C:X:keyboardML15:11:16:text:2
+SY:C:X:keyboardML15:13:2:text:6
+SY:C:X:keyboardML15:15:5:text:6
+SY:C:X:keyboardML15:17:4:text:B
+SY:C:X:keyboardML15:20:22:text:11
+SY:C:X:keyboardML15:23:9:text:18
+SY:C:X:keyboardML15:24:9:text:24
+SY:C:X:keyboardML15:27:7:text:29
+SY:C:X:keyboardML15:29:20:text:30
+SY:C:X:keyboardML15:30:7:text:37
+SY:C:X:keyboardML15:32:2:text:3B
+SY:C:X:keyboardML15:33:1:text:3D
+SY:C:Z:keyboardML15:33:1:text:3D
+SY:C:E:keyboardML15:text:_ML15_Keyboard:00000040:33
+SY:C:T:  typ0 V (-1)
+SY:C:T:  typ1 L (4)
+SY:C:T:  typ2 l (4)
+SY:C:T:  typ3 C (1)
+SY:C:T:  typ4 c (1)
+SY:C:T:  typ5 S (2)
+SY:C:T:  typ6 s (2)
+SY:C:T:  typ7 g (4)
+SY:C:T:  typ8 G (4)
+SY:C:T:  typ9 h (4)
+SY:C:T:  typ10 R (2)
+SY:C:T:  typ11 I (2)
+SY:C:T:  typ12 i (2)
+SY:C:T:  typ13 E (2)
+SY:C:T:  typ14 F (2)
+SY:C:T:  typ15 P (2)
+SY:C:T:keyboardML15: typ16-keyboardML15 A (16)(typ4)
+SY:C:T: typ2 l (4)
+SY:C:T: typ4 c (1)
+SY:C:T: typ6 s (2)
+e

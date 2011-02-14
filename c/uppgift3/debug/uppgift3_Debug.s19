@@ -1,0 +1,325 @@
+S0030000FC
+S10F1000A7CF2FFF16104CA720FDA7312E
+S123100C1B9C87C76C80F609C06B82E682C180241FEC808C00002611E68287CE11C21AE678
+S123102CE6006B83CC00016C80F609C06B8220DBEC808C000127041820FFCBE6831B843D01
+S123104C16113316100C7B11E287C106221D59CE107B05E716113A201216114B200D161102
+S123106C542008161164200316118A1820FFD410601065106A106F107410771077E682871B
+S123108CCE11D21AE6E600FA11E37B11E37B04003DE68287CE11DA1AE6E600F411E37B118E
+S12310ACE37B04003D1B9CE68687B746CC0064136C8287C76C80EC80AC822407EE80086EC6
+S12310CC8020F31B843D1B9C87C76C82E686876C80EC82AC80182C0029C604371610891BED
+S12310EC81C608371610B11B81C6043716109D1B81C604371610B11B81EE82086E82182073
+S123110CFFCA1B843D1B9D87C76C80F604016B82E682E485260CCC00016C80F604016B829C
+S123112C20EEEC801B833D7911E27911E33DC602371610891B81C628371610B11B813DC64F
+S123114C023716109D1B813DF611E3C4042708C603371610891B813D1B9FF611E3C40827AA
+S123116C08C6033716109D1B81F604016B80E680C4022607F604016B8020F31B813D1B9F2D
+S123118CF604016B80C40218270020C601371610891B81C7371610891B81C60A371610B1C4
+S11911AC1B81C73716109D1B812008C602371610D21B811B813D9C
+S12311C20004080C0105090D02060A0E03070B0F0102040810203040FEFCFBF7EFCFBF7FFA
+S10511E2000007
+S9031000EC
+SX:C:s:__start
+SX:A:M:Init$Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/Init.asm
+SX:C:T: typ2 l (4)
+SX:C:T: typ4 c (1)
+SX:C:T: typ6 s (2)
+SX:C:M:keyboardML15$Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/keyboardML15.c
+SX:C:S:F:keyboardML15:ML15_Keyboard:_ML15_Keyboard:(typ4)(typ0)
+SX:C:S:F:keyboardML15:__func__:___func__:(typ11)
+SX:C:S:L:keyboardML15:ML15_Keyboard:key:3:(typ4)
+SX:C:S:L:keyboardML15:ML15_Keyboard:k:2:(typ4)
+SX:C:S:L:keyboardML15:ML15_Keyboard:keyIsSet:0:(typ11)
+SX:C:T:  typ0 V (-1)
+SX:C:T:  typ1 L (4)
+SX:C:T:  typ2 l (4)
+SX:C:T:  typ3 C (1)
+SX:C:T:  typ4 c (1)
+SX:C:T:  typ5 S (2)
+SX:C:T:  typ6 s (2)
+SX:C:T:  typ7 g (4)
+SX:C:T:  typ8 G (4)
+SX:C:T:  typ9 h (4)
+SX:C:T:  typ10 R (2)
+SX:C:T:  typ11 I (2)
+SX:C:T:  typ12 i (2)
+SX:C:T:  typ13 E (2)
+SX:C:T:  typ14 F (2)
+SX:C:T:  typ15 P (2)
+SX:C:T:keyboardML15: typ16-keyboardML15 A (16)(typ4)
+SX:C:T: typ2 l (4)
+SX:C:T: typ4 c (1)
+SX:C:T: typ6 s (2)
+SX:C:M:main$Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/main.c
+SX:C:T:  typ0 V (-1)
+SX:C:T:  typ1 L (4)
+SX:C:T:  typ2 l (4)
+SX:C:T:  typ3 C (1)
+SX:C:T:  typ4 c (1)
+SX:C:T:  typ5 S (2)
+SX:C:T:  typ6 s (2)
+SX:C:T:  typ7 g (4)
+SX:C:T:  typ8 G (4)
+SX:C:T:  typ9 h (4)
+SX:C:T:  typ10 R (2)
+SX:C:T:  typ11 I (2)
+SX:C:T:  typ12 i (2)
+SX:C:T:  typ13 E (2)
+SX:C:T:  typ14 F (2)
+SX:C:T:  typ15 P (2)
+SX:C:T: typ2 l (4)
+SX:C:T: typ4 c (1)
+SX:C:T: typ6 s (2)
+SX:C:M:tools$Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/tools.c
+SX:C:S:F:tools:outone:_outone:(typ0)(typ4)
+SX:C:S:L:tools:outone:bit:2:(typ4)
+SX:C:S:F:tools:__func__:___func__:(typ11)
+SX:C:S:F:tools:outzero:_outzero:(typ0)(typ4)
+SX:C:S:L:tools:outzero:bit:2:(typ4)
+SX:C:S:F:tools:__func__:___func__:(typ11)
+SX:C:S:F:tools:delay:_delay:(typ0)(typ4)
+SX:C:S:L:tools:delay:k:6:(typ4)
+SX:C:S:F:tools:__func__:___func__:(typ11)
+SX:C:S:L:tools:delay:i:2:(typ12)
+SX:C:S:L:tools:delay:j:0:(typ12)
+SX:C:S:F:tools:alarm:_alarm:(typ0)(typ4)
+SX:C:S:L:tools:alarm:signals:6:(typ4)
+SX:C:S:F:tools:__func__:___func__:(typ11)
+SX:C:S:L:tools:alarm:i:2:(typ11)
+SX:C:S:F:tools:check_bit_set:_check_bit_set:(typ12)(typ4)
+SX:C:S:L:tools:check_bit_set:bit:5:(typ4)
+SX:C:S:F:tools:__func__:___func__:(typ11)
+SX:C:S:L:tools:check_bit_set:status:2:(typ4)
+SX:C:S:L:tools:check_bit_set:r:0:(typ12)
+SX:C:T:  typ0 V (-1)
+SX:C:T:  typ1 L (4)
+SX:C:T:  typ2 l (4)
+SX:C:T:  typ3 C (1)
+SX:C:T:  typ4 c (1)
+SX:C:T:  typ5 S (2)
+SX:C:T:  typ6 s (2)
+SX:C:T:  typ7 g (4)
+SX:C:T:  typ8 G (4)
+SX:C:T:  typ9 h (4)
+SX:C:T:  typ10 R (2)
+SX:C:T:  typ11 I (2)
+SX:C:T:  typ12 i (2)
+SX:C:T:  typ13 E (2)
+SX:C:T:  typ14 F (2)
+SX:C:T:  typ15 P (2)
+SX:C:T:tools: typ16-tools Z (4)U float_long {\
+f:(0):(typ8);\
+l:(0):(typ1);\
+}
+SX:C:T:tools: typ17-tools Z (18)S tm {\
+tm_sec:(0):(typ11);\
+tm_min:(2):(typ11);\
+tm_hour:(4):(typ11);\
+tm_mday:(6):(typ11);\
+tm_mon:(8):(typ11);\
+tm_year:(10):(typ11);\
+tm_wday:(12):(typ11);\
+tm_yday:(14):(typ11);\
+tm_isdst:(16):(typ11);\
+}
+SX:C:T:tools: typ18-tools A (8)(typ4)
+SX:C:T:tools: typ19-tools A (8)(typ4)
+SX:C:T: typ2 l (4)
+SX:C:T: typ4 c (1)
+SX:C:T: typ6 s (2)
+SX:C:M:init_c$Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/init_c.c
+SX:C:T:  typ0 V (-1)
+SX:C:T:  typ1 L (4)
+SX:C:T:  typ2 l (4)
+SX:C:T:  typ3 C (1)
+SX:C:T:  typ4 c (1)
+SX:C:T:  typ5 S (2)
+SX:C:T:  typ6 s (2)
+SX:C:T:  typ7 g (4)
+SX:C:T:  typ8 G (4)
+SX:C:T:  typ9 h (4)
+SX:C:T:  typ10 R (2)
+SX:C:T:  typ11 I (2)
+SX:C:T:  typ12 i (2)
+SX:C:T:  typ13 E (2)
+SX:C:T:  typ14 F (2)
+SX:C:T:  typ15 P (2)
+SX:C:T: typ2 l (4)
+SX:C:T: typ4 c (1)
+SX:C:T: typ6 s (2)
+SX:C:M:actions$Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/actions.c
+SX:C:S:F:actions:up:_up:(typ0)
+SX:C:S:F:actions:__func__:___func__:(typ11)
+SX:C:S:L:actions:up:status:0:(typ4)
+SX:C:S:F:actions:step:_step:(typ0)
+SX:C:S:F:actions:__func__:___func__:(typ11)
+SX:C:S:L:actions:step:status:0:(typ4)
+SX:C:T:  typ0 V (-1)
+SX:C:T:  typ1 L (4)
+SX:C:T:  typ2 l (4)
+SX:C:T:  typ3 C (1)
+SX:C:T:  typ4 c (1)
+SX:C:T:  typ5 S (2)
+SX:C:T:  typ6 s (2)
+SX:C:T:  typ7 g (4)
+SX:C:T:  typ8 G (4)
+SX:C:T:  typ9 h (4)
+SX:C:T:  typ10 R (2)
+SX:C:T:  typ11 I (2)
+SX:C:T:  typ12 i (2)
+SX:C:T:  typ13 E (2)
+SX:C:T:  typ14 F (2)
+SX:C:T:  typ15 P (2)
+SX:C:T: typ2 l (4)
+SX:C:T: typ4 c (1)
+SX:C:T: typ6 s (2)
+SX:A:X:Init:7:1000
+SX:A:X:Init:8:1001
+SX:A:X:Init:9:1004
+SX:A:X:Init:10:1007
+SX:A:X:Init:11:1008
+SX:A:X:Init:12:100A
+SX:A:F:Init:__start:1000:7
+SX:A:E:Init:__start:100A:12
+SX:C:F:keyboardML15:_ML15_Keyboard:0000100C:6
+SX:C:X:keyboardML15:6:1:100C
+SX:C:X:keyboardML15:11:16:100E
+SX:C:X:keyboardML15:13:2:1012
+SX:C:X:keyboardML15:15:5:1012
+SX:C:X:keyboardML15:17:4:1017
+SX:C:X:keyboardML15:20:22:101D
+SX:C:X:keyboardML15:23:9:1024
+SX:C:X:keyboardML15:24:9:1030
+SX:C:X:keyboardML15:27:7:1035
+SX:C:X:keyboardML15:29:20:103C
+SX:C:X:keyboardML15:30:7:1043
+SX:C:X:keyboardML15:32:2:1047
+SX:C:X:keyboardML15:33:1:1049
+SX:C:Z:keyboardML15:33:1:1049
+SX:C:E:keyboardML15:_ML15_Keyboard:0000104C:33
+SX:C:F:main:_main:0000104C:7
+SX:C:X:main:7:1:104C
+SX:C:X:main:9:3:104C
+SX:C:X:main:10:2:104F
+SX:C:X:main:14:4:104F
+SX:C:X:main:15:3:1055
+SX:C:X:main:18:6:1060
+SX:C:X:main:19:9:1060
+SX:C:X:main:20:9:1063
+SX:C:X:main:23:6:1065
+SX:C:X:main:24:9:1065
+SX:C:X:main:25:9:1068
+SX:C:X:main:28:6:106A
+SX:C:X:main:29:9:106A
+SX:C:X:main:30:9:106D
+SX:C:X:main:33:6:106F
+SX:C:X:main:34:9:106F
+SX:C:X:main:35:9:1072
+SX:C:X:main:38:6:1074
+SX:C:X:main:39:9:1074
+SX:C:X:main:40:9:1077
+SX:C:X:main:43:6:1077
+SX:C:X:main:44:9:1077
+SX:C:X:main:47:6:1077
+SX:C:X:main:48:9:1077
+SX:C:X:main:51:6:1077
+SX:C:X:main:52:9:1077
+SX:C:X:main:59:1:107B
+SX:C:Z:main:59:1:107B
+SX:C:E:main:_main:00001089:59
+SX:C:F:tools:_outone:00001089:9
+SX:C:X:tools:9:1:1089
+SX:C:X:tools:12:3:1089
+SX:C:X:tools:13:2:1099
+SX:C:X:tools:14:1:109C
+SX:C:Z:tools:14:1:109C
+SX:C:E:tools:_outone:0000109D:14
+SX:C:F:tools:_outzero:0000109D:16
+SX:C:X:tools:16:1:109D
+SX:C:X:tools:19:3:109D
+SX:C:X:tools:20:2:10AD
+SX:C:X:tools:21:1:10B0
+SX:C:Z:tools:21:1:10B0
+SX:C:E:tools:_outzero:000010B1:21
+SX:C:F:tools:_delay:000010B1:24
+SX:C:X:tools:24:1:10B1
+SX:C:X:tools:47:18:10B3
+SX:C:X:tools:48:18:10BE
+SX:C:X:tools:49:2:10C2
+SX:C:X:tools:51:1:10CF
+SX:C:Z:tools:51:1:10CF
+SX:C:E:tools:_delay:000010D2:51
+SX:C:F:tools:_alarm:000010D2:53
+SX:C:X:tools:53:1:10D2
+SX:C:X:tools:56:2:10D4
+SX:C:X:tools:58:5:10E5
+SX:C:X:tools:59:5:10ED
+SX:C:X:tools:60:5:10F5
+SX:C:X:tools:61:5:10FD
+SX:C:X:tools:56:24:1105
+SX:C:X:tools:63:1:110E
+SX:C:Z:tools:63:1:110E
+SX:C:E:tools:_alarm:00001111:63
+SX:C:F:tools:_check_bit_set:00001111:65
+SX:C:X:tools:65:1:1111
+SX:C:X:tools:68:18:1113
+SX:C:X:tools:70:3:1117
+SX:C:X:tools:72:2:111C
+SX:C:X:tools:74:5:1122
+SX:C:X:tools:76:5:1127
+SX:C:X:tools:79:2:112E
+SX:C:X:tools:80:1:1130
+SX:C:Z:tools:80:1:1130
+SX:C:E:tools:_check_bit_set:00001133:80
+SX:C:F:init_c:_init:00001133:6
+SX:C:X:init_c:6:1:1133
+SX:C:X:init_c:8:4:1133
+SX:C:X:init_c:9:4:1136
+SX:C:X:init_c:11:1:1139
+SX:C:Z:init_c:11:1:1139
+SX:C:E:init_c:_init:0000113A:11
+SX:C:F:actions:_start:0000113A:6
+SX:C:X:actions:6:1:113A
+SX:C:X:actions:9:3:113A
+SX:C:X:actions:12:3:1142
+SX:C:X:actions:13:1:114A
+SX:C:Z:actions:13:1:114A
+SX:C:E:actions:_start:0000114B:13
+SX:C:F:actions:_stop:0000114B:15
+SX:C:X:actions:15:1:114B
+SX:C:X:actions:18:3:114B
+SX:C:X:actions:19:1:1153
+SX:C:Z:actions:19:1:1153
+SX:C:E:actions:_stop:00001154:19
+SX:C:F:actions:_down:00001154:21
+SX:C:X:actions:21:1:1154
+SX:C:X:actions:24:15:1154
+SX:C:X:actions:27:5:115B
+SX:C:X:actions:29:1:1163
+SX:C:Z:actions:29:1:1163
+SX:C:E:actions:_down:00001164:29
+SX:C:F:actions:_up:00001164:31
+SX:C:X:actions:31:1:1164
+SX:C:X:actions:35:15:1166
+SX:C:X:actions:38:5:116D
+SX:C:X:actions:42:3:1175
+SX:C:X:actions:44:2:117A
+SX:C:X:actions:47:5:1180
+SX:C:X:actions:49:1:1187
+SX:C:Z:actions:49:1:1187
+SX:C:E:actions:_up:0000118A:49
+SX:C:F:actions:_step:0000118A:51
+SX:C:X:actions:51:1:118A
+SX:C:X:actions:54:24:118C
+SX:C:X:actions:55:15:1191
+SX:C:X:actions:58:5:1197
+SX:C:X:actions:61:5:119F
+SX:C:X:actions:64:5:11A6
+SX:C:X:actions:65:5:11AE
+SX:C:X:actions:70:5:11B7
+SX:C:X:actions:73:1:11BF
+SX:C:Z:actions:73:1:11BF
+SX:C:E:actions:_step:000011C2:73
+SX:C:S:G:keyboardML15:keytab:_keytab:000011C2:(typ16-keyboardML15)
+SX:C:S:G:tools:bitpattern_1:_bitpattern_1:000011D2:(typ18-tools)
+SX:C:S:G:tools:bitpattern_0:_bitpattern_0:000011DA:(typ19-tools)
+SX:C:S:G:init_c:comnr:_comnr:000011E2:(typ4)
+SX:C:S:G:init_c:drcopy:_drcopy:000011E3:(typ4)

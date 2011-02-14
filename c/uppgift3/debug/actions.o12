@@ -1,0 +1,102 @@
+mod:actions:O12:actions.o12
+seg:text:136
+seg:bss:0
+seg:data:0
+seg:rodata:0
+C:text	C602371600001B81C628371600001B81
+C:text	3D
+C:text	C602371600001B813D
+C:text	F60000C4042708C603371600001B813D
+C:text	1B9FF60000C4082708C603371600001B
+C:text	81F604016B80E680C4022607F604016B
+C:text	8020F31B813D
+C:text	1B9FF604016B80C40218270020C60137
+C:text	1600001B81C7371600001B81C60A3716
+C:text	00001B81C7371600001B812008C60237
+C:text	1600001B811B813D
+RG:text:actions:00000004:O:W:_outone:32
+RG:text:actions:0000000C:O:W:_delay:40
+RG:text:actions:00000015:O:W:_outzero:63
+RG:text:actions:0000001B:O:W:_drcopy:84
+RG:text:actions:00000025:O:W:_outone:93
+RG:text:actions:0000002D:O:W:_drcopy:121
+RG:text:actions:00000037:O:W:_outzero:130
+RG:text:actions:00000061:O:W:_outone:192
+RG:text:actions:00000068:O:W:_outone:200
+RG:text:actions:00000070:O:W:_delay:208
+RG:text:actions:00000077:O:W:_outzero:214
+RG:text:actions:00000081:O:W:_alarm:226
+G:text:actions:0000001A:_down
+G:text:actions:00000050:_step
+G:text:actions:00000011:_stop
+G:text:actions:0000002A:_up
+G:text:actions:00000000:_start
+SY:C:M:actions$Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/actions.c
+SY:C:F:actions:text:_start:00000000:6
+SY:C:X:actions:6:1:text:0
+SY:C:X:actions:9:3:text:0
+SY:C:X:actions:12:3:text:8
+SY:C:X:actions:13:1:text:10
+SY:C:Z:actions:13:1:text:10
+SY:C:E:actions:text:_start:00000011:13
+SY:C:F:actions:text:_stop:00000011:15
+SY:C:X:actions:15:1:text:11
+SY:C:X:actions:18:3:text:11
+SY:C:X:actions:19:1:text:19
+SY:C:Z:actions:19:1:text:19
+SY:C:E:actions:text:_stop:0000001A:19
+SY:C:F:actions:text:_down:0000001A:21
+SY:C:X:actions:21:1:text:1A
+SY:C:X:actions:24:15:text:1A
+SY:C:X:actions:27:5:text:21
+SY:C:X:actions:29:1:text:29
+SY:C:Z:actions:29:1:text:29
+SY:C:E:actions:text:_down:0000002A:29
+SY:C:F:actions:text:_up:0000002A:31
+SY:C:X:actions:31:1:text:2A
+SY:C:S:F:actions:up:_up:(typ0)
+SY:C:S:F:actions:__func__:___func__:(typ11)
+SY:C:S:L:actions:up:status:0:(typ4)
+SY:C:X:actions:35:15:text:2C
+SY:C:X:actions:38:5:text:33
+SY:C:X:actions:42:3:text:3B
+SY:C:X:actions:44:2:text:40
+SY:C:X:actions:47:5:text:46
+SY:C:X:actions:49:1:text:4D
+SY:C:Z:actions:49:1:text:4D
+SY:C:E:actions:text:_up:00000050:49
+SY:C:F:actions:text:_step:00000050:51
+SY:C:X:actions:51:1:text:50
+SY:C:S:F:actions:step:_step:(typ0)
+SY:C:S:F:actions:__func__:___func__:(typ11)
+SY:C:S:L:actions:step:status:0:(typ4)
+SY:C:X:actions:54:24:text:52
+SY:C:X:actions:55:15:text:57
+SY:C:X:actions:58:5:text:5D
+SY:C:X:actions:61:5:text:65
+SY:C:X:actions:64:5:text:6C
+SY:C:X:actions:65:5:text:74
+SY:C:X:actions:70:5:text:7D
+SY:C:X:actions:73:1:text:85
+SY:C:Z:actions:73:1:text:85
+SY:C:E:actions:text:_step:00000088:73
+SY:C:T:  typ0 V (-1)
+SY:C:T:  typ1 L (4)
+SY:C:T:  typ2 l (4)
+SY:C:T:  typ3 C (1)
+SY:C:T:  typ4 c (1)
+SY:C:T:  typ5 S (2)
+SY:C:T:  typ6 s (2)
+SY:C:T:  typ7 g (4)
+SY:C:T:  typ8 G (4)
+SY:C:T:  typ9 h (4)
+SY:C:T:  typ10 R (2)
+SY:C:T:  typ11 I (2)
+SY:C:T:  typ12 i (2)
+SY:C:T:  typ13 E (2)
+SY:C:T:  typ14 F (2)
+SY:C:T:  typ15 P (2)
+SY:C:T: typ2 l (4)
+SY:C:T: typ4 c (1)
+SY:C:T: typ6 s (2)
+e

@@ -1,0 +1,99 @@
+QLD (Version 4.8.0)- Link/Load Summary: 'debug\uppgift3_Debug.s19'
+SCRIPT FILES FROM THE FOLLOWING PATH(S):
+  'C:/Program Files/GMV/EducDist/config/xcc12'
+
+SCRIPT READ FROM THE FOLLOWING FILE(S):
+  'default.lsc'
+
+---------------------------
+ SEARCHED LIBRARIES:
+ 'C:/Program Files/GMV/EducDist/lib/xcc12/libcd.e12'
+ 'C:/Program Files/GMV/EducDist/lib/xcc12/libed.e12'
+ 'C:/Program Files/GMV/EducDist/lib/xcc12/librtkd.e12'
+ 'C:/Program Files/GMV/EducDist/lib/xcc12/libccd.e12'
+
+---------------------------
+ PROGRAM ENTRY:'__start'
+---------------------------
+ GROUPS AND SEGMENTS:
+
+  GROUP 'test_group', READ ONLY ,allocation to: 00001000 - 000011E3, (size: 484 Bytes)
+   00001000 0000100B 'init'
+   0000100C 000011C1 'text'
+   000011C2 000011E1 'data'
+   000011E2 000011E3 'bss'
+
+  GROUP 'interrupt_vectors', READ ONLY
+   NO SEGMENTS
+
+  GROUP 'const_group',
+   NO SEGMENTS
+---------------------------
+LINKER DEFINED CONSTANTS:
+   __rom_code_enabled = 0
+   __heap_start = 000011E4
+  from segment 'text'
+   0000100C '__text__start'
+   000011C2 '__text__end'
+   000001B6 '__text__size'
+  from segment 'init'
+   00001000 '__init__start'
+   0000100C '__init__end'
+   0000000C '__init__size'
+  from segment 'bss'
+   000011E2 '__bss__start'
+   000011E4 '__bss__end'
+   00000002 '__bss__size'
+  from segment 'data'
+   000011C2 '__data__start'
+   000011E2 '__data__end'
+   00000020 '__data__size'
+  from segment 'rodata'
+   00000000 '__rodata__start'
+   00000000 '__rodata__end'
+   00000000 '__rodata__size'
+---------------------------
+GLOBAL SYMBOL(S):
+
+ in module: 'Init' of type 'O12' defined in file 'Init.o12'
+  in segment: 'init'
+   00001007 '_exit'
+   00001000 '__start'
+
+ in module: 'keyboardML15' of type 'O12' defined in file 'keyboardML15.o12'
+  in segment: 'text'
+   0000100C '_ML15_Keyboard'
+  in segment: 'data'
+   000011C2 '_keytab'
+
+ in module: 'main' of type 'O12' defined in file 'main.o12'
+  in segment: 'text'
+   0000104C '_main'
+
+ in module: 'tools' of type 'O12' defined in file 'tools.o12'
+  in segment: 'text'
+   000010D2 '_alarm'
+   000010B1 '_delay'
+   0000109D '_outzero'
+   00001111 '_check_bit_set'
+   00001089 '_outone'
+  in segment: 'data'
+   000011DA '_bitpattern_0'
+   000011D2 '_bitpattern_1'
+
+ in module: 'init_c' of type 'O12' defined in file 'init_c.o12'
+  in segment: 'text'
+   00001133 '_init'
+  in segment: 'bss'
+   000011E2 '_comnr'
+   000011E3 '_drcopy'
+
+ in module: 'actions' of type 'O12' defined in file 'actions.o12'
+  in segment: 'text'
+   00001154 '_down'
+   0000118A '_step'
+   0000114B '_stop'
+   00001164 '_up'
+   0000113A '_start'
+---
+ End of listfile

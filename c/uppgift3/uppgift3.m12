@@ -1,0 +1,314 @@
+# V 1.8.3 (10 October, 2010)
+# Created by Xcc-project manager 
+# DO NOT EDIT
+#
+#-----------------------------------------------
+#SETTINGS SECTION
+##CSIMSET=".\setup.hc12sim"
+##EXTMAKEFILE=""
+##EXTMAKEFILEPARAM=""
+#+[BackCol(0)]=
+#+16776960
+#+[TextCol(0)]=
+#+0
+#+[NewLine(0)]=
+#+2
+#+[LineFeed(0)]=
+#+2
+#+[LoadCom(0)]=
+#+l\n
+#+[Baud(0)(0)]=
+#+9600
+#+[Dtr(0)(0)]=
+#+0
+#+[Rts(0)(0)]=
+#+0
+#+[Cts(0)(0)]=
+#+0
+#+[Dsr(0)(0)]=
+#+0
+#+[ByteS(0)(0)]=
+#+8
+#+[Parity(0)(0)]=
+#+0
+#+[StopB(0)(0)]=
+#+0
+#+[EXonO(0)(0)]=
+#+0
+#+[EXonI(0)(0)]=
+#+0
+#-----------------------------------------------
+##TYPE E
+##USESTARTUP=0
+##OTYPE=1
+#-----------------------------------------------
+#OPEN FILE SECTION
+#-----------------------------------------------
+#PROJECT FILES SECTION
+
+FILES= \
+	".\src\Init.asm" "" "1"  \
+	".\src\keyboardML15.c" "" "1"  \
+	".\src\keyboardML15.h" "" "1"  \
+	".\src\ports.h" "" "1"  \
+	".\src\init.h" "" "1"  \
+	".\src\main.c" "" "1"  \
+	".\src\tools.c" "" "1"  \
+	".\src\tools.h" "" "1"  \
+	".\src\init_c.c" "" "1"  \
+	".\src\actions.c" "" "1"  \
+	".\src\actions.h" "" "1" 
+#-----------------------------------------------
+#PROJECT OPTIONS SECTION
+
+!IFCONF	Debug
+##TARGETNAME="uppgift3_Debug"
+##OBJDIR="debug"
+##TARGDIR="debug"
+##STDINCPATH=1
+##STDLIBPATH=1
+ASFLAGS=-g -e
+CCFLAGS=-g -w4 -O
+LNFLAGS=-g -i default.lsc
+#-----------------------------------------------
+#OBJECT FILES SECTION
+
+OBJ= \
+	"debug\Init.o12" \
+	"debug\keyboardML15.o12" \
+	"debug\main.o12" \
+	"debug\tools.o12" \
+	"debug\init_c.o12" \
+	"debug\actions.o12"
+#-----------------------------------------------
+#DEFINES/UNDEFINES SECTION
+
+ASMDEFINES= \
+	_DEBUG
+
+DEFINES= \
+	_DEBUG
+
+UNDEFINES=
+#-----------------------------------------------
+#INCLUDES AND LIBRARIES SECTION
+#
+
+INCLUDES=
+
+LIBRARIES= \
+	"libcd.e12" \
+	"libed.e12" \
+	"librtkd.e12"
+
+LIBRARYPATHS=
+#-----------------------------------------------
+#MACROS for MAKE
+
+INC=
+
+ASMDEF= \
+ -D_DEBUG
+
+DEF= \
+ -D_DEBUG
+
+UNDEF=
+
+LIB= \
+	-l"libcd.e12" \
+	-l"libed.e12" \
+	-l"librtkd.e12"
+
+LIBPATH=
+#-----------------------------------------------
+#RULES SECTION CONFIGURATION 
+
+# Application
+"debug\uppgift3_Debug.s19": $(OBJ)
+	LINK -o"debug\uppgift3_Debug.s19" $(LNFLAGS)  $(LIBPATH) $(LIB) -L"C:\Program Files\GMV\EducDist\bin\..\lib\xcc12" -l"C:\Program Files\GMV\EducDist\bin\..\lib\xcc12\libccd.e12"  $(OBJ)
+#-----------------------------------------------
+
+
+# Clean
+clean:
+	RMFI "debug\uppgift3_Debug.s19"
+	RMFI "debug\Init.o12"
+	RMFI "debug\keyboardML15.o12"
+	RMFI "debug\keyboardML15.o12"
+	RMFI "debug\ports.o12"
+	RMFI "debug\init.o12"
+	RMFI "debug\main.o12"
+	RMFI "debug\tools.o12"
+	RMFI "debug\tools.o12"
+	RMFI "debug\init_c.o12"
+	RMFI "debug\actions.o12"
+	RMFI "debug\actions.o12"
+#-----------------------------------------------
+
+
+# Dependencies and their build rules
+
+"debug\Init.o12":	\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/Init.asm"
+	ASSM  $(ASFLAGS) $(ASMDEF) -o"debug\Init.o12" "Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/Init.asm"
+"debug\keyboardML15.o12":	\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/keyboardML15.c"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/keyboardML15.h"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/ports.h"
+	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
+	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"debug\keyboardML15.o12" "Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/keyboardML15.c"
+"debug\main.o12":	\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/main.c"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/init.h"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/keyboardML15.h"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/tools.h"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/ports.h"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/actions.h"
+	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
+	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"debug\main.o12" "Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/main.c"
+"debug\tools.o12":	\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/tools.c"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/ports.h"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/tools.h"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/init.h"
+	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
+	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"debug\tools.o12" "Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/tools.c"
+"debug\init_c.o12":	\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/init_c.c"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/init.h"
+	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
+	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"debug\init_c.o12" "Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/init_c.c"
+"debug\actions.o12":	\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/actions.c"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/actions.h"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/tools.h"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/init.h"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/ports.h"
+	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
+	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"debug\actions.o12" "Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/actions.c"
+!EICONF	Debug
+
+!IFCONF	Final
+##TARGETNAME="uppgift3_Final"
+##OBJDIR="final"
+##TARGDIR="final"
+##STDINCPATH=1
+##STDLIBPATH=1
+ASFLAGS=-e
+CCFLAGS=-w4 -O
+LNFLAGS=-i default.lsc
+#-----------------------------------------------
+#OBJECT FILES SECTION
+
+OBJ= \
+	"final\Init.o12" \
+	"final\keyboardML15.o12" \
+	"final\main.o12" \
+	"final\tools.o12" \
+	"final\init_c.o12" \
+	"final\actions.o12"
+#-----------------------------------------------
+#DEFINES/UNDEFINES SECTION
+
+ASMDEFINES=
+
+DEFINES=
+
+UNDEFINES=
+#-----------------------------------------------
+#INCLUDES AND LIBRARIES SECTION
+#
+
+INCLUDES=
+
+LIBRARIES= \
+	"libc.e12" \
+	"libe.e12" \
+	"librtk.e12"
+
+LIBRARYPATHS=
+#-----------------------------------------------
+#MACROS for MAKE
+
+INC=
+
+ASMDEF=
+
+DEF=
+
+UNDEF=
+
+LIB= \
+	-l"libc.e12" \
+	-l"libe.e12" \
+	-l"librtk.e12"
+
+LIBPATH=
+#-----------------------------------------------
+#RULES SECTION CONFIGURATION 
+
+# Application
+"final\uppgift3_Final.s19": $(OBJ)
+	LINK -o"final\uppgift3_Final.s19" $(LNFLAGS)  $(LIBPATH) $(LIB) -L"C:\Program Files\GMV\EducDist\bin\..\lib\xcc12" -l"C:\Program Files\GMV\EducDist\bin\..\lib\xcc12\libcc.e12"  $(OBJ)
+#-----------------------------------------------
+
+
+# Clean
+clean:
+	RMFI "final\uppgift3_Final.s19"
+	RMFI "final\Init.o12"
+	RMFI "final\keyboardML15.o12"
+	RMFI "final\keyboardML15.o12"
+	RMFI "final\ports.o12"
+	RMFI "final\init.o12"
+	RMFI "final\main.o12"
+	RMFI "final\tools.o12"
+	RMFI "final\tools.o12"
+	RMFI "final\init_c.o12"
+	RMFI "final\actions.o12"
+	RMFI "final\actions.o12"
+#-----------------------------------------------
+
+
+# Dependencies and their build rules
+
+"final\Init.o12":	\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/Init.asm"
+	ASSM  $(ASFLAGS) $(ASMDEF) -o"final\Init.o12" "Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/Init.asm"
+"final\keyboardML15.o12":	\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/keyboardML15.c"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/keyboardML15.h"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/ports.h"
+	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
+	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"final\keyboardML15.o12" "Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/keyboardML15.c"
+"final\main.o12":	\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/main.c"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/init.h"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/keyboardML15.h"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/tools.h"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/ports.h"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/actions.h"
+	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
+	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"final\main.o12" "Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/main.c"
+"final\tools.o12":	\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/tools.c"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/ports.h"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/tools.h"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/init.h"
+	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
+	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"final\tools.o12" "Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/tools.c"
+"final\init_c.o12":	\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/init_c.c"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/init.h"
+	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
+	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"final\init_c.o12" "Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/init_c.c"
+"final\actions.o12":	\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/actions.c"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/actions.h"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/tools.h"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/init.h"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/ports.h"
+	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
+	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"final\actions.o12" "Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/actions.c"
+!EICONF	Final

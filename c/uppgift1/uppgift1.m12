@@ -1,4 +1,4 @@
-# V 1.8.2 (1 June, 2010)
+# V 1.8.3 (10 October, 2010)
 # Created by Xcc-project manager 
 # DO NOT EDIT
 #
@@ -130,13 +130,13 @@ clean:
 # Dependencies and their build rules
 
 "debug\Main.o12":	\
-	"Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Main.c"\
-	"Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Ports.h"
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift1/src/Main.c"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift1/src/Ports.h"
 	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
-	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"debug\Main.o12" "Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Main.c"
+	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"debug\Main.o12" "Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift1/src/Main.c"
 "debug\Init.o12":	\
-	"Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm"
-	ASSM  $(ASFLAGS) $(ASMDEF) -o"debug\Init.o12" "Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm"
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm"
+	ASSM  $(ASFLAGS) $(ASMDEF) -o"debug\Init.o12" "Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm"
 !EICONF	Debug
 
 !IFCONF	Final
@@ -212,11 +212,11 @@ clean:
 # Dependencies and their build rules
 
 "final\Main.o12":	\
-	"Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Main.c"\
-	"Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Ports.h"
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift1/src/Main.c"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift1/src/Ports.h"
 	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
-	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"final\Main.o12" "Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Main.c"
+	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"final\Main.o12" "Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift1/src/Main.c"
 "final\Init.o12":	\
-	"Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm"
-	ASSM  $(ASFLAGS) $(ASMDEF) -o"final\Init.o12" "Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm"
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm"
+	ASSM  $(ASFLAGS) $(ASMDEF) -o"final\Init.o12" "Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm"
 !EICONF	Final

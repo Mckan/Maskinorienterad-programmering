@@ -1,4 +1,4 @@
-# V 1.8.2 (1 June, 2010)
+# V 1.8.3 (10 October, 2010)
 # Created by Xcc-project manager 
 # DO NOT EDIT
 #
@@ -43,7 +43,6 @@
 ##OTYPE=1
 #-----------------------------------------------
 #OPEN FILE SECTION
-##OF ".\src\keyboardML15.c"
 #-----------------------------------------------
 #PROJECT FILES SECTION
 
@@ -133,14 +132,14 @@ clean:
 # Dependencies and their build rules
 
 "debug\Init.o12":	\
-	"Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm"
-	ASSM  $(ASFLAGS) $(ASMDEF) -o"debug\Init.o12" "Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm"
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm"
+	ASSM  $(ASFLAGS) $(ASMDEF) -o"debug\Init.o12" "Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm"
 "debug\keyboardML15.o12":	\
-	"Z:/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/keyboardML15.c"\
-	"Z:/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/keyboardML15.h"\
-	"Z:/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/ports.h"
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/keyboardML15.c"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/keyboardML15.h"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/ports.h"
 	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
-	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"debug\keyboardML15.o12" "Z:/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/keyboardML15.c"
+	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"debug\keyboardML15.o12" "Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/keyboardML15.c"
 !EICONF	Debug
 
 !IFCONF	Final
@@ -217,12 +216,12 @@ clean:
 # Dependencies and their build rules
 
 "final\Init.o12":	\
-	"Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm"
-	ASSM  $(ASFLAGS) $(ASMDEF) -o"final\Init.o12" "Z:/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm"
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm"
+	ASSM  $(ASFLAGS) $(ASMDEF) -o"final\Init.o12" "Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift1/src/Init.asm"
 "final\keyboardML15.o12":	\
-	"Z:/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/keyboardML15.c"\
-	"Z:/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/keyboardML15.h"\
-	"Z:/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/ports.h"
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/keyboardML15.c"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/keyboardML15.h"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/ports.h"
 	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
-	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"final\keyboardML15.o12" "Z:/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/keyboardML15.c"
+	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"final\keyboardML15.o12" "Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift2/uppgift2/src/keyboardML15.c"
 !EICONF	Final

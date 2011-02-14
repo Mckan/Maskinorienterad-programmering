@@ -1,0 +1,42 @@
+mod:init_c:O12:init_c.o12
+seg:text:7
+seg:bss:2
+seg:data:0
+seg:rodata:0
+C:text	7900007900003D
+C:bss	0000
+RG:text:init_c:00000001:O:W:_comnr:39
+RG:text:init_c:00000004:O:W:_drcopy:42
+G:text:init_c:00000000:_init
+G:bss:init_c:00000000:_comnr
+G:bss:init_c:00000001:_drcopy
+SY:C:M:init_c$Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/init_c.c
+SY:C:S:G:init_c:comnr:_comnr:(typ4)
+SY:C:S:G:init_c:drcopy:_drcopy:(typ4)
+SY:C:F:init_c:text:_init:00000000:6
+SY:C:X:init_c:6:1:text:0
+SY:C:X:init_c:8:4:text:0
+SY:C:X:init_c:9:4:text:3
+SY:C:X:init_c:11:1:text:6
+SY:C:Z:init_c:11:1:text:6
+SY:C:E:init_c:text:_init:00000007:11
+SY:C:T:  typ0 V (-1)
+SY:C:T:  typ1 L (4)
+SY:C:T:  typ2 l (4)
+SY:C:T:  typ3 C (1)
+SY:C:T:  typ4 c (1)
+SY:C:T:  typ5 S (2)
+SY:C:T:  typ6 s (2)
+SY:C:T:  typ7 g (4)
+SY:C:T:  typ8 G (4)
+SY:C:T:  typ9 h (4)
+SY:C:T:  typ10 R (2)
+SY:C:T:  typ11 I (2)
+SY:C:T:  typ12 i (2)
+SY:C:T:  typ13 E (2)
+SY:C:T:  typ14 F (2)
+SY:C:T:  typ15 P (2)
+SY:C:T: typ2 l (4)
+SY:C:T: typ4 c (1)
+SY:C:T: typ6 s (2)
+e
