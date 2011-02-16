@@ -5,12 +5,13 @@
 #include "actions.h"
 
 void main(void)
-{
+{ 
+  // Init program
   init();
+  irqinit();
   while(1)
   {
 	  // Initiera vars
-	  
 	  comnr = ML15_Keyboard();
 	  switch(comnr) 
 	  {
@@ -41,10 +42,12 @@ void main(void)
 	       
 	     // Borra
 	     case 5:
+	       drill();
 	       break;
 	       
 	     //Auto 
 	     case 6:
+	       auto_drill();
 	       break;
 	       
 	     // Om fel värde
@@ -53,8 +56,7 @@ void main(void)
 	  
 	  }
 
-
+  }
 }
 
-}
 

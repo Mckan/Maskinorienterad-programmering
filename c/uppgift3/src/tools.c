@@ -23,58 +23,84 @@ void outzero(unsigned char bit)
 
 void delay(unsigned char k)
 {
-/**
-clra - 1 * 1
-clrb - 1 * 1
-std - 1 * 2
-ldd - k * 2
-cpd - k * 2
-bcc - k * 1
-ldx - k * 3
-inx - k * 1
-stx - k * 2
-bra - k * 3
-leas - 1 * 2
-rts 1 * 5
-
-125ns * 40 = 5mikros
-5 mikros * 10000 = 50ms
-
-Snittiden för k*klockcykel ger 2.851...
-*/
-
-  //float i = 2.85714285714 * k * 1; // Borde vara 10000 inte 1
-  unsigned int i = 100 * k;
-  unsigned int j = 0;
-  for (j; j < i; j++);
-
+  unsigned int i = 0;
+  //unsigned int j = 20000 * k; IRL
+  unsigned int j = 50 * k; // ISL
+  for (i; i < j; i++)
+  {
+    __asm(" NOP");
+    __asm(" NOP");
+    __asm(" NOP");
+    __asm(" NOP");
+    __asm(" NOP");
+    __asm(" NOP");
+  }
 }
 
 void alarm(unsigned char signals)
 {
-  int i;
-  for(i = 0; i < signals; i++)
+  unsigned char i = 0;
+  while(i < signals)
   {
     outone(4);
     delay(8);
     outzero(4);
     delay(4);
+    i++;
   }
 }
 
-unsigned int check_bit_set(unsigned char bit)
+void ddtest()
 {
-  unsigned char status;
-  unsigned int r = 0;
+   unsigned char status;
+   unsigned char count;
+   
+   status = DRSTATUS;
+   while(!(status & 4))
+   {
+      // Fördröj testet om borr nere
+      delay(2);
+      
+      // Öka räknare 
+      count++;
+      
+      // Om det gått 4 sek (count=40) skicka alarm och hoppa ut
+      if(count == 40)
+      {
+        alarm(2);
+	break;
+      }
+      // Läs status igen
+      status = DRSTATUS;
+   }
+}
+void refpo()
+{
   // Läs status
-  status = DRSTATUS;
-  // Medans status ej är "borr i topp", vänta
-  while(!(status & bit))
+  unsigned char status = DRSTATUS;
+  
+  // Kolla bit 0 om den är 1a
+  while(!(status & 1))
   {
-    r = 1;
-    // Borr i topp, break;
+    // Inte 1a, stega och läs igen
+    step();
     status = DRSTATUS;
   }
-  
-  return r;
 }
+
+void nstep(unsigned char steps)
+{
+  // Sätt räknare
+  char i = 0;
+  // Medans i är mindre än antalet steg in
+  while(i < steps)
+  {
+    // Stega och öka i
+    step();
+    i++;
+  }
+}
+
+
+
+

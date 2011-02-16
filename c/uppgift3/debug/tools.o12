@@ -1,5 +1,5 @@
 mod:tools:O12:tools.o12
-seg:text:170
+seg:text:238
 seg:bss:0
 seg:data:16
 seg:rodata:0
@@ -7,16 +7,21 @@ C:text	E68287CE00001AE6E600FA00007B0000
 C:text	7B04003D
 C:text	E68287CE00001AE6E600F400007B0000
 C:text	7B04003D
-C:text	1B9CE68687B746CC0064136C8287C76C
-C:text	80EC80AC822407EE80086E8020F31B84
-C:text	3D
-C:text	1B9C87C76C82E686876C80EC82AC8018
-C:text	2C0029C604371600001B81C608371600
-C:text	001B81C604371600001B81C604371600
-C:text	001B81EE82086E821820FFCA1B843D
-C:text	1B9D87C76C80F604016B82E682E48526
-C:text	0CCC00016C80F604016B8220EEEC801B
-C:text	833D
+C:text	1B9C87C76C82E68687B746CC01F4136C
+C:text	80EC82AC80240DA7A7A7A7A7A7EE8208
+C:text	6E8220ED1B843D
+C:text	1B9F6980E680E18318240026C6043716
+C:text	00001B81C608371600001B81C6043716
+C:text	00001B81C604371600001B8162801820
+C:text	FFD21B813D
+C:text	1B9EF604016B81E681C40418260023C6
+C:text	02371600001B816280E680C128260AC6
+C:text	02371600001B812009F604016B811820
+C:text	FFD51B823D
+C:text	1B9FF604016B80E680C401260A160000
+C:text	F604016B8020F01B813D
+C:text	1B9D6982E685876C80E682B714AC802C
+C:text	07160000628220EC1B833D
 C:data	0102040810203040FEFCFBF7EFCFBF7F
 RG:text:tools:00000004:O:W:_bitpattern_1:64
 RG:text:tools:0000000B:O:W:_drcopy:67
@@ -24,16 +29,22 @@ RG:text:tools:0000000E:O:W:_drcopy:68
 RG:text:tools:00000018:O:W:_bitpattern_0:96
 RG:text:tools:0000001F:O:W:_drcopy:99
 RG:text:tools:00000022:O:W:_drcopy:100
-RG:text:tools:00000060:O:W:_outone:213
-RG:text:tools:00000068:O:W:_delay:219
-RG:text:tools:00000070:O:W:_outzero:225
-RG:text:tools:00000078:O:W:_delay:231
+RG:text:tools:0000005F:O:W:_outone:209
+RG:text:tools:00000067:O:W:_delay:215
+RG:text:tools:0000006F:O:W:_outzero:221
+RG:text:tools:00000077:O:W:_delay:227
+RG:text:tools:00000097:O:W:_delay:276
+RG:text:tools:000000A7:O:W:_alarm:295
+RG:text:tools:000000C7:O:W:_step:347
+RG:text:tools:000000E5:O:W:_step:396
 G:data:tools:00000008:_bitpattern_0
 G:data:tools:00000000:_bitpattern_1
-G:text:tools:00000049:_alarm
+G:text:tools:0000004F:_alarm
 G:text:tools:00000028:_delay
 G:text:tools:00000014:_outzero
-G:text:tools:00000088:_check_bit_set
+G:text:tools:000000B9:_refpo
+G:text:tools:000000D3:_nstep
+G:text:tools:00000084:_ddtest
 G:text:tools:00000000:_outone
 SY:C:M:tools$Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/tools.c
 SY:C:S:G:tools:bitpattern_1:_bitpattern_1:(typ18-tools)
@@ -65,43 +76,77 @@ SY:C:S:L:tools:delay:k:6:(typ4)
 SY:C:S:F:tools:__func__:___func__:(typ11)
 SY:C:S:L:tools:delay:i:2:(typ12)
 SY:C:S:L:tools:delay:j:0:(typ12)
-SY:C:X:tools:47:18:text:2A
-SY:C:X:tools:48:18:text:35
-SY:C:X:tools:49:2:text:39
-SY:C:X:tools:51:1:text:46
-SY:C:Z:tools:51:1:text:46
-SY:C:E:tools:text:_delay:00000049:51
-SY:C:F:tools:text:_alarm:00000049:53
-SY:C:X:tools:53:1:text:49
+SY:C:X:tools:26:18:text:2A
+SY:C:X:tools:28:18:text:2E
+SY:C:X:tools:29:2:text:39
+SY:C:X:tools:31:4:text:3F
+SY:C:X:tools:32:4:text:40
+SY:C:X:tools:33:4:text:41
+SY:C:X:tools:34:4:text:42
+SY:C:X:tools:35:4:text:43
+SY:C:X:tools:36:4:text:44
+SY:C:X:tools:29:15:text:45
+SY:C:X:tools:38:1:text:4C
+SY:C:Z:tools:38:1:text:4C
+SY:C:E:tools:text:_delay:0000004F:38
+SY:C:F:tools:text:_alarm:0000004F:40
+SY:C:X:tools:40:1:text:4F
 SY:C:S:F:tools:alarm:_alarm:(typ0)(typ4)
-SY:C:S:L:tools:alarm:signals:6:(typ4)
+SY:C:S:L:tools:alarm:signals:3:(typ4)
 SY:C:S:F:tools:__func__:___func__:(typ11)
-SY:C:S:L:tools:alarm:i:2:(typ11)
-SY:C:X:tools:56:2:text:4B
-SY:C:X:tools:58:5:text:5C
-SY:C:X:tools:59:5:text:64
-SY:C:X:tools:60:5:text:6C
-SY:C:X:tools:61:5:text:74
-SY:C:X:tools:56:24:text:7C
-SY:C:X:tools:63:1:text:85
-SY:C:Z:tools:63:1:text:85
-SY:C:E:tools:text:_alarm:00000088:63
-SY:C:F:tools:text:_check_bit_set:00000088:65
-SY:C:X:tools:65:1:text:88
-SY:C:S:F:tools:check_bit_set:_check_bit_set:(typ12)(typ4)
-SY:C:S:L:tools:check_bit_set:bit:5:(typ4)
+SY:C:S:L:tools:alarm:i:0:(typ4)
+SY:C:X:tools:42:19:text:51
+SY:C:X:tools:43:2:text:53
+SY:C:X:tools:45:5:text:5B
+SY:C:X:tools:46:5:text:63
+SY:C:X:tools:47:5:text:6B
+SY:C:X:tools:48:5:text:73
+SY:C:X:tools:49:5:text:7B
+SY:C:X:tools:51:1:text:81
+SY:C:Z:tools:51:1:text:81
+SY:C:E:tools:text:_alarm:00000084:51
+SY:C:F:tools:text:_ddtest:00000084:53
+SY:C:X:tools:53:1:text:84
+SY:C:S:F:tools:ddtest:_ddtest:(typ0)
 SY:C:S:F:tools:__func__:___func__:(typ11)
-SY:C:S:L:tools:check_bit_set:status:2:(typ4)
-SY:C:S:L:tools:check_bit_set:r:0:(typ12)
-SY:C:X:tools:68:18:text:8A
-SY:C:X:tools:70:3:text:8E
-SY:C:X:tools:72:2:text:93
-SY:C:X:tools:74:5:text:99
-SY:C:X:tools:76:5:text:9E
-SY:C:X:tools:79:2:text:A5
-SY:C:X:tools:80:1:text:A7
-SY:C:Z:tools:80:1:text:A7
-SY:C:E:tools:text:_check_bit_set:000000AA:80
+SY:C:S:L:tools:ddtest:status:1:(typ4)
+SY:C:S:L:tools:ddtest:count:0:(typ4)
+SY:C:X:tools:58:4:text:86
+SY:C:X:tools:59:3:text:8B
+SY:C:X:tools:62:7:text:93
+SY:C:X:tools:65:7:text:9B
+SY:C:X:tools:68:20:text:9D
+SY:C:X:tools:70:9:text:A3
+SY:C:X:tools:71:2:text:AB
+SY:C:X:tools:74:7:text:AD
+SY:C:X:tools:76:1:text:B6
+SY:C:Z:tools:76:1:text:B6
+SY:C:E:tools:text:_ddtest:000000B9:76
+SY:C:F:tools:text:_refpo:000000B9:77
+SY:C:X:tools:77:1:text:B9
+SY:C:S:F:tools:refpo:_refpo:(typ0)
+SY:C:S:F:tools:__func__:___func__:(typ11)
+SY:C:S:L:tools:refpo:status:0:(typ4)
+SY:C:X:tools:80:24:text:BB
+SY:C:X:tools:83:2:text:C0
+SY:C:X:tools:86:5:text:C6
+SY:C:X:tools:87:5:text:C9
+SY:C:X:tools:89:1:text:D0
+SY:C:Z:tools:89:1:text:D0
+SY:C:E:tools:text:_refpo:000000D3:89
+SY:C:F:tools:text:_nstep:000000D3:91
+SY:C:X:tools:91:1:text:D3
+SY:C:S:F:tools:nstep:_nstep:(typ0)(typ4)
+SY:C:S:L:tools:nstep:steps:5:(typ4)
+SY:C:S:F:tools:__func__:___func__:(typ11)
+SY:C:S:L:tools:nstep:i:2:(typ3)
+SY:C:X:tools:94:10:text:D5
+SY:C:X:tools:96:2:text:D7
+SY:C:X:tools:99:5:text:E4
+SY:C:X:tools:100:5:text:E7
+SY:C:X:tools:102:1:text:EB
+SY:C:Z:tools:102:1:text:EB
+SY:C:E:tools:text:_nstep:000000EE:102
 SY:C:T:  typ0 V (-1)
 SY:C:T:  typ1 L (4)
 SY:C:T:  typ2 l (4)

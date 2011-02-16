@@ -17,37 +17,37 @@ SCRIPT READ FROM THE FOLLOWING FILE(S):
 ---------------------------
  GROUPS AND SEGMENTS:
 
-  GROUP 'test_group', READ ONLY ,allocation to: 00001000 - 000011E3, (size: 484 Bytes)
-   00001000 0000100B 'init'
-   0000100C 000011C1 'text'
-   000011C2 000011E1 'data'
-   000011E2 000011E3 'bss'
-
-  GROUP 'interrupt_vectors', READ ONLY
+  GROUP 'const_group',
    NO SEGMENTS
 
-  GROUP 'const_group',
+  GROUP 'test_group', READ ONLY ,allocation to: 00001000 - 000012CD, (size: 718 Bytes)
+   00001000 0000100B 'init'
+   0000100C 00001295 'text'
+   00001296 000012CB 'data'
+   000012CC 000012CD 'bss'
+
+  GROUP 'interrupt_vectors', READ ONLY
    NO SEGMENTS
 ---------------------------
 LINKER DEFINED CONSTANTS:
    __rom_code_enabled = 0
-   __heap_start = 000011E4
+   __heap_start = 000012CE
   from segment 'text'
    0000100C '__text__start'
-   000011C2 '__text__end'
-   000001B6 '__text__size'
+   00001296 '__text__end'
+   0000028A '__text__size'
   from segment 'init'
    00001000 '__init__start'
    0000100C '__init__end'
    0000000C '__init__size'
   from segment 'bss'
-   000011E2 '__bss__start'
-   000011E4 '__bss__end'
+   000012CC '__bss__start'
+   000012CE '__bss__end'
    00000002 '__bss__size'
   from segment 'data'
-   000011C2 '__data__start'
-   000011E2 '__data__end'
-   00000020 '__data__size'
+   00001296 '__data__start'
+   000012CC '__data__end'
+   00000036 '__data__size'
   from segment 'rodata'
    00000000 '__rodata__start'
    00000000 '__rodata__end'
@@ -64,7 +64,7 @@ GLOBAL SYMBOL(S):
   in segment: 'text'
    0000100C '_ML15_Keyboard'
   in segment: 'data'
-   000011C2 '_keytab'
+   00001296 '_keytab'
 
  in module: 'main' of type 'O12' defined in file 'main.o12'
   in segment: 'text'
@@ -72,28 +72,37 @@ GLOBAL SYMBOL(S):
 
  in module: 'tools' of type 'O12' defined in file 'tools.o12'
   in segment: 'text'
-   000010D2 '_alarm'
-   000010B1 '_delay'
-   0000109D '_outzero'
-   00001111 '_check_bit_set'
-   00001089 '_outone'
+   000010E5 '_alarm'
+   000010BE '_delay'
+   000010AA '_outzero'
+   0000114F '_refpo'
+   00001169 '_nstep'
+   0000111A '_ddtest'
+   00001096 '_outone'
   in segment: 'data'
-   000011DA '_bitpattern_0'
-   000011D2 '_bitpattern_1'
+   000012AE '_bitpattern_0'
+   000012A6 '_bitpattern_1'
 
  in module: 'init_c' of type 'O12' defined in file 'init_c.o12'
   in segment: 'text'
-   00001133 '_init'
+   000011A6 '_IRQHandler'
+   00001184 '_init'
+   0000119C '_givealarm'
+   0000118B '_irqinit'
   in segment: 'bss'
-   000011E2 '_comnr'
-   000011E3 '_drcopy'
+   000012CC '_comnr'
+   000012CD '_drcopy'
 
  in module: 'actions' of type 'O12' defined in file 'actions.o12'
   in segment: 'text'
-   00001154 '_down'
-   0000118A '_step'
-   0000114B '_stop'
-   00001164 '_up'
-   0000113A '_start'
+   000011E9 '_down'
+   0000121F '_step'
+   000011E0 '_stop'
+   000011F9 '_up'
+   00001257 '_drill'
+   000011CF '_start'
+   00001267 '_auto_drill'
+  in segment: 'data'
+   000012B6 '_pattern'
 ---
  End of listfile

@@ -1,25 +1,72 @@
 mod:init_c:O12:init_c.o12
-seg:text:7
+seg:text:75
 seg:bss:2
 seg:data:0
 seg:rodata:0
 C:text	7900007900003D
+C:text	CC00007CFFF2C6FF7B0DC27B0DC310EF
+C:text	3D
+C:text	CC00013B1600001B823D
+C:text	1B9EF60DC06B81C401270AC6FF7B0DC2
+C:text	0600002011C6016B80371600001B81C6
+C:text	FF7B0DC310EF1B820B
 C:bss	0000
-RG:text:init_c:00000001:O:W:_comnr:39
-RG:text:init_c:00000004:O:W:_drcopy:42
+RG:text:init_c:00000001:O:W:_comnr:43
+RG:text:init_c:00000004:O:W:_drcopy:46
+RG:text:init_c:00000008:O:W:_IRQHandler:69
+RG:text:init_c:0000001D:O:W:_alarm:104
+RG:text:init_c:00000033:O:W:__start:146
+RG:text:init_c:0000003D:O:W:_alarm:161
+G:text:init_c:00000022:_IRQHandler
 G:text:init_c:00000000:_init
+G:text:init_c:00000018:_givealarm
+G:text:init_c:00000007:_irqinit
 G:bss:init_c:00000000:_comnr
 G:bss:init_c:00000001:_drcopy
 SY:C:M:init_c$Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/init_c.c
 SY:C:S:G:init_c:comnr:_comnr:(typ4)
 SY:C:S:G:init_c:drcopy:_drcopy:(typ4)
-SY:C:F:init_c:text:_init:00000000:6
-SY:C:X:init_c:6:1:text:0
-SY:C:X:init_c:8:4:text:0
-SY:C:X:init_c:9:4:text:3
-SY:C:X:init_c:11:1:text:6
-SY:C:Z:init_c:11:1:text:6
-SY:C:E:init_c:text:_init:00000007:11
+SY:C:F:init_c:text:_init:00000000:10
+SY:C:X:init_c:10:1:text:0
+SY:C:X:init_c:12:4:text:0
+SY:C:X:init_c:13:4:text:3
+SY:C:X:init_c:15:1:text:6
+SY:C:Z:init_c:15:1:text:6
+SY:C:E:init_c:text:_init:00000007:15
+SY:C:F:init_c:text:_irqinit:00000007:17
+SY:C:X:init_c:17:1:text:7
+SY:C:S:F:init_c:irqinit:_irqinit:(typ0)
+SY:C:S:F:init_c:__func__:___func__:(typ11)
+SY:C:X:init_c:20:3:text:7
+SY:C:X:init_c:23:2:text:D
+SY:C:X:init_c:24:2:text:12
+SY:C:X:init_c:26:2:text:15
+SY:C:X:init_c:27:1:text:17
+SY:C:Z:init_c:27:1:text:17
+SY:C:E:init_c:text:_irqinit:00000018:27
+SY:C:F:init_c:text:_givealarm:00000018:29
+SY:C:X:init_c:29:1:text:18
+SY:C:X:init_c:31:3:text:18
+SY:C:X:init_c:32:1:text:21
+SY:C:Z:init_c:32:1:text:21
+SY:C:E:init_c:text:_givealarm:00000022:32
+SY:C:F:init_c:text:_IRQHandler:00000022:33
+SY:C:X:init_c:33:13:text:22
+SY:C:S:F:init_c:IRQHandler:_IRQHandler:(typ0)(typ0)
+SY:C:S:F:init_c:__func__:___func__:(typ11)
+SY:C:S:L:init_c:IRQHandler:status:1:(typ4)
+SY:C:S:L:init_c:IRQHandler:i:0:(typ4)
+SY:C:X:init_c:36:24:text:24
+SY:C:X:init_c:38:15:text:29
+SY:C:X:init_c:41:2:text:2D
+SY:C:X:init_c:44:4:text:32
+SY:C:X:init_c:49:21:text:37
+SY:C:X:init_c:51:5:text:3B
+SY:C:X:init_c:54:2:text:41
+SY:C:X:init_c:57:4:text:46
+SY:C:X:init_c:60:1:text:48
+SY:C:Z:init_c:60:1:text:48
+SY:C:E:init_c:text:_IRQHandler:0000004B:60
 SY:C:T:  typ0 V (-1)
 SY:C:T:  typ1 L (4)
 SY:C:T:  typ2 l (4)

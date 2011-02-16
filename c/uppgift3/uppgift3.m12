@@ -1,10 +1,10 @@
-# V 1.8.3 (10 October, 2010)
+# V 1.8.2 (1 June, 2010)
 # Created by Xcc-project manager 
 # DO NOT EDIT
 #
 #-----------------------------------------------
 #SETTINGS SECTION
-##CSIMSET=".\setup.hc12sim"
+##CSIMSET=".\setup_b.hc12sim"
 ##EXTMAKEFILE=""
 ##EXTMAKEFILEPARAM=""
 #+[BackCol(0)]=
@@ -176,7 +176,8 @@ clean:
 	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"debug\tools.o12" "Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/tools.c"
 "debug\init_c.o12":	\
 	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/init_c.c"\
-	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/init.h"
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/init.h"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/ports.h"
 	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
 	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"debug\init_c.o12" "Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/init_c.c"
 "debug\actions.o12":	\
@@ -300,7 +301,8 @@ clean:
 	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"final\tools.o12" "Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/tools.c"
 "final\init_c.o12":	\
 	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/init_c.c"\
-	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/init.h"
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/init.h"\
+	"Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/ports.h"
 	COMP  $(CCFLAGS) $(DEF) $(UNDEF)  \
 	-I"C:\Program Files\GMV\EducDist\bin\..\include" $(INC) -o"final\init_c.o12" "Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/init_c.c"
 "final\actions.o12":	\

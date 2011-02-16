@@ -1,7 +1,7 @@
 mod:actions:O12:actions.o12
-seg:text:136
+seg:text:199
 seg:bss:0
-seg:data:0
+seg:data:21
 seg:rodata:0
 C:text	C602371600001B81C628371600001B81
 C:text	3D
@@ -14,72 +14,116 @@ C:text	1B9FF604016B80C40218270020C60137
 C:text	1600001B81C7371600001B81C60A3716
 C:text	00001B81C7371600001B812008C60237
 C:text	1600001B811B813D
-RG:text:actions:00000004:O:W:_outone:32
-RG:text:actions:0000000C:O:W:_delay:40
-RG:text:actions:00000015:O:W:_outzero:63
-RG:text:actions:0000001B:O:W:_drcopy:84
-RG:text:actions:00000025:O:W:_outone:93
-RG:text:actions:0000002D:O:W:_drcopy:121
-RG:text:actions:00000037:O:W:_outzero:130
-RG:text:actions:00000061:O:W:_outone:192
-RG:text:actions:00000068:O:W:_outone:200
-RG:text:actions:00000070:O:W:_delay:208
-RG:text:actions:00000077:O:W:_outzero:214
-RG:text:actions:00000081:O:W:_alarm:226
+C:text	1600001600001600001600001600003D
+C:text	1B9F6980160000E68087CE00001AE6E6
+C:text	00C1FF2717E68087CE00001AE6E60037
+C:text	1600001B81160000628020DB1B813D
+C:data	00010101010101010201050202020204
+C:data	04030802FF
+RG:text:actions:00000004:O:W:_outone:61
+RG:text:actions:0000000C:O:W:_delay:69
+RG:text:actions:00000015:O:W:_outzero:92
+RG:text:actions:0000001B:O:W:_drcopy:113
+RG:text:actions:00000025:O:W:_outone:122
+RG:text:actions:0000002D:O:W:_drcopy:150
+RG:text:actions:00000037:O:W:_outzero:159
+RG:text:actions:00000061:O:W:_outone:221
+RG:text:actions:00000068:O:W:_outone:229
+RG:text:actions:00000070:O:W:_delay:237
+RG:text:actions:00000077:O:W:_outzero:243
+RG:text:actions:00000081:O:W:_alarm:255
+RG:text:actions:00000089:O:W:_start:278
+RG:text:actions:0000008C:O:W:_down:281
+RG:text:actions:0000008F:O:W:_ddtest:284
+RG:text:actions:00000092:O:W:_up:287
+RG:text:actions:00000095:O:W:_stop:290
+RG:text:actions:0000009D:O:W:_refpo:318
+RG:text:actions:000000A3:O:W:_pattern:326
+RG:text:actions:000000B1:O:W:_pattern:337
+RG:text:actions:000000B9:O:W:_nstep:341
+RG:text:actions:000000BE:O:W:_drill:345
 G:text:actions:0000001A:_down
 G:text:actions:00000050:_step
 G:text:actions:00000011:_stop
 G:text:actions:0000002A:_up
+G:data:actions:00000000:_pattern
+G:text:actions:00000088:_drill
 G:text:actions:00000000:_start
+G:text:actions:00000098:_auto_drill
 SY:C:M:actions$Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/actions.c
-SY:C:F:actions:text:_start:00000000:6
-SY:C:X:actions:6:1:text:0
-SY:C:X:actions:9:3:text:0
-SY:C:X:actions:12:3:text:8
-SY:C:X:actions:13:1:text:10
-SY:C:Z:actions:13:1:text:10
-SY:C:E:actions:text:_start:00000011:13
-SY:C:F:actions:text:_stop:00000011:15
-SY:C:X:actions:15:1:text:11
-SY:C:X:actions:18:3:text:11
-SY:C:X:actions:19:1:text:19
-SY:C:Z:actions:19:1:text:19
-SY:C:E:actions:text:_stop:0000001A:19
-SY:C:F:actions:text:_down:0000001A:21
-SY:C:X:actions:21:1:text:1A
-SY:C:X:actions:24:15:text:1A
-SY:C:X:actions:27:5:text:21
-SY:C:X:actions:29:1:text:29
-SY:C:Z:actions:29:1:text:29
-SY:C:E:actions:text:_down:0000002A:29
-SY:C:F:actions:text:_up:0000002A:31
-SY:C:X:actions:31:1:text:2A
+SY:C:S:G:actions:pattern:_pattern:(typ16-actions)
+SY:C:F:actions:text:_start:00000000:8
+SY:C:X:actions:8:1:text:0
+SY:C:X:actions:11:3:text:0
+SY:C:X:actions:14:3:text:8
+SY:C:X:actions:15:1:text:10
+SY:C:Z:actions:15:1:text:10
+SY:C:E:actions:text:_start:00000011:15
+SY:C:F:actions:text:_stop:00000011:17
+SY:C:X:actions:17:1:text:11
+SY:C:X:actions:20:3:text:11
+SY:C:X:actions:21:1:text:19
+SY:C:Z:actions:21:1:text:19
+SY:C:E:actions:text:_stop:0000001A:21
+SY:C:F:actions:text:_down:0000001A:23
+SY:C:X:actions:23:1:text:1A
+SY:C:X:actions:26:15:text:1A
+SY:C:X:actions:29:5:text:21
+SY:C:X:actions:31:1:text:29
+SY:C:Z:actions:31:1:text:29
+SY:C:E:actions:text:_down:0000002A:31
+SY:C:F:actions:text:_up:0000002A:33
+SY:C:X:actions:33:1:text:2A
 SY:C:S:F:actions:up:_up:(typ0)
 SY:C:S:F:actions:__func__:___func__:(typ11)
 SY:C:S:L:actions:up:status:0:(typ4)
-SY:C:X:actions:35:15:text:2C
-SY:C:X:actions:38:5:text:33
-SY:C:X:actions:42:3:text:3B
-SY:C:X:actions:44:2:text:40
-SY:C:X:actions:47:5:text:46
-SY:C:X:actions:49:1:text:4D
-SY:C:Z:actions:49:1:text:4D
-SY:C:E:actions:text:_up:00000050:49
-SY:C:F:actions:text:_step:00000050:51
-SY:C:X:actions:51:1:text:50
+SY:C:X:actions:37:15:text:2C
+SY:C:X:actions:40:5:text:33
+SY:C:X:actions:44:3:text:3B
+SY:C:X:actions:46:2:text:40
+SY:C:X:actions:49:5:text:46
+SY:C:X:actions:51:1:text:4D
+SY:C:Z:actions:51:1:text:4D
+SY:C:E:actions:text:_up:00000050:51
+SY:C:F:actions:text:_step:00000050:53
+SY:C:X:actions:53:1:text:50
 SY:C:S:F:actions:step:_step:(typ0)
 SY:C:S:F:actions:__func__:___func__:(typ11)
 SY:C:S:L:actions:step:status:0:(typ4)
-SY:C:X:actions:54:24:text:52
-SY:C:X:actions:55:15:text:57
-SY:C:X:actions:58:5:text:5D
-SY:C:X:actions:61:5:text:65
-SY:C:X:actions:64:5:text:6C
-SY:C:X:actions:65:5:text:74
-SY:C:X:actions:70:5:text:7D
-SY:C:X:actions:73:1:text:85
-SY:C:Z:actions:73:1:text:85
-SY:C:E:actions:text:_step:00000088:73
+SY:C:X:actions:56:24:text:52
+SY:C:X:actions:57:15:text:57
+SY:C:X:actions:60:5:text:5D
+SY:C:X:actions:63:5:text:65
+SY:C:X:actions:66:5:text:6C
+SY:C:X:actions:67:5:text:74
+SY:C:X:actions:72:5:text:7D
+SY:C:X:actions:75:1:text:85
+SY:C:Z:actions:75:1:text:85
+SY:C:E:actions:text:_step:00000088:75
+SY:C:F:actions:text:_drill:00000088:76
+SY:C:X:actions:76:1:text:88
+SY:C:X:actions:78:3:text:88
+SY:C:X:actions:79:3:text:8B
+SY:C:X:actions:80:3:text:8E
+SY:C:X:actions:81:3:text:91
+SY:C:X:actions:82:3:text:94
+SY:C:X:actions:83:1:text:97
+SY:C:Z:actions:83:1:text:97
+SY:C:E:actions:text:_drill:00000098:83
+SY:C:F:actions:text:_auto_drill:00000098:86
+SY:C:X:actions:86:1:text:98
+SY:C:S:F:actions:auto_drill:_auto_drill:(typ0)
+SY:C:S:F:actions:__func__:___func__:(typ11)
+SY:C:S:L:actions:auto_drill:i:0:(typ4)
+SY:C:X:actions:88:19:text:9A
+SY:C:X:actions:90:3:text:9C
+SY:C:X:actions:93:2:text:9F
+SY:C:X:actions:96:5:text:AD
+SY:C:X:actions:97:5:text:BD
+SY:C:X:actions:98:5:text:C0
+SY:C:X:actions:101:1:text:C4
+SY:C:Z:actions:101:1:text:C4
+SY:C:E:actions:text:_auto_drill:000000C7:101
 SY:C:T:  typ0 V (-1)
 SY:C:T:  typ1 L (4)
 SY:C:T:  typ2 l (4)
@@ -96,6 +140,7 @@ SY:C:T:  typ12 i (2)
 SY:C:T:  typ13 E (2)
 SY:C:T:  typ14 F (2)
 SY:C:T:  typ15 P (2)
+SY:C:T:actions: typ16-actions A (21)(typ4)
 SY:C:T: typ2 l (4)
 SY:C:T: typ4 c (1)
 SY:C:T: typ6 s (2)

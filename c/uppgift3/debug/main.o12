@@ -1,60 +1,67 @@
 mod:main:O12:main.o12
-seg:text:61
+seg:text:74
 seg:bss:0
 seg:data:0
 seg:rodata:0
-C:text	1600001600007B000087C106221D59CE
-C:text	000005E71600002012160000200D1600
-C:text	00200816000020031600001820FFD4
+C:text	1600001600001600007B000087C10622
+C:text	2759CE000005E7160000201C16000020
+C:text	171600002012160000200D1600002008
+C:text	16000020031600001820FFCA
 C:text	0000000000000000000000000000
-RG:text:main:00000001:O:W:_init:30
-RG:text:main:00000004:O:W:_ML15_Keyboard:39
-RG:text:main:00000007:O:W:_comnr:40
-RG:text:main:00000015:O:W:_start:56
-RG:text:main:0000001A:O:W:_stop:67
-RG:text:main:0000001F:O:W:_down:78
-RG:text:main:00000024:O:W:_up:89
-RG:text:main:00000029:O:W:_step:100
-RL:text:main:00000010:O:W:0000002F:text:47
-RL:text:main:0000002F:O:W:00000014:text:134
-RL:text:main:00000031:O:W:00000019:text:134
-RL:text:main:00000033:O:W:0000001E:text:134
-RL:text:main:00000035:O:W:00000023:text:134
-RL:text:main:00000037:O:W:00000028:text:134
-RL:text:main:00000039:O:W:0000002B:text:134
-RL:text:main:0000003B:O:W:0000002B:text:134
+RG:text:main:00000001:O:W:_init:31
+RG:text:main:00000004:O:W:_irqinit:34
+RG:text:main:00000007:O:W:_ML15_Keyboard:42
+RG:text:main:0000000A:O:W:_comnr:43
+RG:text:main:00000018:O:W:_start:59
+RG:text:main:0000001D:O:W:_stop:70
+RG:text:main:00000022:O:W:_down:81
+RG:text:main:00000027:O:W:_up:92
+RG:text:main:0000002C:O:W:_step:103
+RG:text:main:00000031:O:W:_drill:114
+RG:text:main:00000036:O:W:_auto_drill:125
+RL:text:main:00000013:O:W:0000003C:text:50
+RL:text:main:0000003C:O:W:00000017:text:145
+RL:text:main:0000003E:O:W:0000001C:text:145
+RL:text:main:00000040:O:W:00000021:text:145
+RL:text:main:00000042:O:W:00000026:text:145
+RL:text:main:00000044:O:W:0000002B:text:145
+RL:text:main:00000046:O:W:00000030:text:145
+RL:text:main:00000048:O:W:00000035:text:145
 G:text:main:00000000:_main
 SY:C:M:main$Z:/MOP/Git/Maskinorienterad-programmering/c/uppgift3/src/main.c
 SY:C:F:main:text:_main:00000000:7
 SY:C:X:main:7:1:text:0
-SY:C:X:main:9:3:text:0
-SY:C:X:main:10:2:text:3
-SY:C:X:main:14:4:text:3
-SY:C:X:main:15:3:text:9
-SY:C:X:main:18:6:text:14
-SY:C:X:main:19:9:text:14
+SY:C:X:main:10:3:text:0
+SY:C:X:main:11:3:text:3
+SY:C:X:main:12:2:text:6
+SY:C:X:main:15:4:text:6
+SY:C:X:main:16:3:text:C
+SY:C:X:main:19:6:text:17
 SY:C:X:main:20:9:text:17
-SY:C:X:main:23:6:text:19
-SY:C:X:main:24:9:text:19
+SY:C:X:main:21:9:text:1A
+SY:C:X:main:24:6:text:1C
 SY:C:X:main:25:9:text:1C
-SY:C:X:main:28:6:text:1E
-SY:C:X:main:29:9:text:1E
+SY:C:X:main:26:9:text:1F
+SY:C:X:main:29:6:text:21
 SY:C:X:main:30:9:text:21
-SY:C:X:main:33:6:text:23
-SY:C:X:main:34:9:text:23
+SY:C:X:main:31:9:text:24
+SY:C:X:main:34:6:text:26
 SY:C:X:main:35:9:text:26
-SY:C:X:main:38:6:text:28
-SY:C:X:main:39:9:text:28
+SY:C:X:main:36:9:text:29
+SY:C:X:main:39:6:text:2B
 SY:C:X:main:40:9:text:2B
-SY:C:X:main:43:6:text:2B
-SY:C:X:main:44:9:text:2B
-SY:C:X:main:47:6:text:2B
-SY:C:X:main:48:9:text:2B
-SY:C:X:main:51:6:text:2B
-SY:C:X:main:52:9:text:2B
-SY:C:X:main:59:1:text:2F
-SY:C:Z:main:59:1:text:2F
-SY:C:E:main:text:_main:0000003D:59
+SY:C:X:main:41:9:text:2E
+SY:C:X:main:44:6:text:30
+SY:C:X:main:45:9:text:30
+SY:C:X:main:46:9:text:33
+SY:C:X:main:49:6:text:35
+SY:C:X:main:50:9:text:35
+SY:C:X:main:51:9:text:38
+SY:C:X:main:54:6:text:38
+SY:C:X:main:55:9:text:38
+SY:C:X:main:60:1:text:3C
+SY:C:Z:main:60:1:text:3C
+SY:C:E:main:text:_main:0000004A:60
 SY:C:T:  typ0 V (-1)
 SY:C:T:  typ1 L (4)
 SY:C:T:  typ2 l (4)

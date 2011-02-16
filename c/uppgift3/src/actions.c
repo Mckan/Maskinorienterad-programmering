@@ -3,6 +3,8 @@
 #include "init.h"
 #include "ports.h"
 
+unsigned char pattern[] = {0,1,1,1,1,1,1,1,2,1,5,2,2,2,2,4,4,3,8,2,0xFF};
+
 void start()
 {
   // Etta till bit 2 startar borren
@@ -71,4 +73,29 @@ void step()
   }
   
 }
+void drill()
+{
+  start();
+  down();
+  ddtest();
+  up();
+  stop();
+}
 
+
+void auto_drill()
+{
+  unsigned char i = 0;
+  // Gå till referensposition
+  refpo();
+  
+  // Så länge det inte är slutmarkering
+  while(pattern[i] != 0xFF)
+  {
+    // Stega antal steg och borra ett hål
+    nstep(pattern[i]);
+    drill();
+    i++;
+  }
+  
+}
